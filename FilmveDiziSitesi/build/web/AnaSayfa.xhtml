@@ -8,6 +8,9 @@
         <h:outputStylesheet library="css" name="bootstrap.css" />
         <h:outputStylesheet  name="/kendicssim/anaSayfa.css" />
         <script src="https://kit.fontawesome.com/66f2961287.js" crossorigin="anonymous"></script>
+
+        <h:outputScript library="js" name="main.js" />
+
         <!-- Bootstrap CSS -->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -18,6 +21,31 @@
 
     </h:head>
     <h:body>
+
+        <div class="girişKısmı" id="girisSayfasi">
+
+            <div class="girişKısmı-top"> 
+                <h1>Üye Girişi</h1>
+                <i class="fa-solid fa-xmark" id="exit"></i>
+            </div>
+
+            <div class="girişKısmı-bottom">
+                <h:form id="form-ayarları">
+                    <p>Kullanıcı Adı :</p>
+                    <h:inputText id="username" value="" styleClass="users" >
+
+                    </h:inputText>
+
+                    <p>Password :</p>
+                    <h:inputSecret id="password" value="Password" styleClass="password"  />
+
+                    <h:commandButton value="Giriş Yap" action="#" styleClass="buttonss" />
+                </h:form>
+
+            </div>
+
+        </div>
+
         <div class="containerr">
             <header class="header">
                 <div class="header-left">
@@ -29,7 +57,7 @@
                         <li><h:outputLink value="VizyondakiFilmler.xhtml">Vizyondaki Filmler</h:outputLink></li>
                         <li><h:outputLink value="Kitaplık.xhtml">Kitaplık</h:outputLink></li>
                         <li><h:outputLink value="İletişim.xhtml">İletişim</h:outputLink></li>
-                        
+
                     </ul>
                 </div>
 
@@ -41,7 +69,7 @@
                 </div>
 
                 <div class="header-right">
-                    <a href="#" class="small-button register">
+                    <a href="girişKısmı.xhtml" class="small-button register">
                         <i class="fas fa-user-plus"></i>
                         <div class="nomob">Üye Ol</div>
                     </a>
@@ -49,6 +77,13 @@
                         <i class="fas fa-sign-in-alt"></i> 
                         <div class="nomob">Üye Girişi</div> 
                     </button>
+                </div>
+
+                <div class="header-right-Profil">
+                    <i class="fa-regular fa-user"></i>
+                    <h:outputText value="Semih" styleClass="kullanıcıİsmi" id="a" />
+
+
                 </div>
 
             </header>
