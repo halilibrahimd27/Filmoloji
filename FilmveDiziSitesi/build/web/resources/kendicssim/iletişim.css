@@ -73,3 +73,29 @@ a:hover{
     text-decoration: none;
 }
 
+
+.mesajiniz{
+    text-align: center;
+    margin-top: 50px;
+    color:#fff;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+
+#film-islemleri{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-direction: column;
+}
+
+#film-islemleri input[type="submit"] {
+    border: none;
+    width: 150px;
+    height: 40px;
+    background-color: #23272B;
+    color:#ffff;
+    border-radius: 5px;
+}

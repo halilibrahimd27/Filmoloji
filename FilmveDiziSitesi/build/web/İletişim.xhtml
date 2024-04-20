@@ -18,10 +18,11 @@
     </h:head>
     <h:body>
         <div class="containerr">
+
             <header class="header">
                 <div class="header-left">
                     <ul class="header-left-ul">
-                         <li><h:outputLink value="AnaSayfa.xhtml">AnaSayfa</h:outputLink></li>
+                        <li><h:outputLink value="AnaSayfa.xhtml">AnaSayfa</h:outputLink></li>
                         <li><h:outputLink value="Film.xhtml">Filmler</h:outputLink></li>
                         <li><h:outputLink value="Dizi.xhtml">Diziler</h:outputLink></li>
                         <li><h:outputLink value="Trendeki Diziler.xhtml">Trendeki Diziler</h:outputLink></li>
@@ -49,9 +50,14 @@
                     </button>
                 </div>
 
+
             </header>
 
-
+            <h1 class="mesajiniz"> Mesajınız :</h1>
+            <h:form id="film-islemleri">
+                <h:inputTextarea styleClass="mesaj"  value=" " rows="8" cols="70" />
+                <h:commandButton value="Gönder" action="#" styleClass="btn btn-succes"></h:commandButton>
+            </h:form>
 
         </div>
 
