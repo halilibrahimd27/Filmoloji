@@ -16,19 +16,24 @@
         <div id="containerr"> 
             <h:form>
                 <h:commandButton value="Geri" action="Diziİslemleri.xhtml" styleClass="geriButton" />
+                
                 <h:dataTable value=" " var="film"  styleClass="table table-striped">
+                    
                     <h:column  styleClass="font-weight-bold">
                         <f:facet   name="header">Dizi'nin Adı</f:facet>
                         Recep ivedik 7
                     </h:column>
+                    
                     <h:column styleClass="font-weight-bold">
                         <f:facet   name="header">Dizi'nin Türü</f:facet>
                         komedi
                     </h:column>
+                    
                     <h:column styleClass="font-weight-bold">
                         <f:facet  name="header">Dizi'nin Kategorisi</f:facet>
                         yerli
                     </h:column>
+                    
                     <h:column styleClass="font-weight-bold">
                         <f:facet   name="header">İşlem</f:facet>
                         <h:commandButton styleClass="btn btn-danger button" value="Sil" action="#"  />
