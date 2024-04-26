@@ -1,0 +1,27 @@
+.geriButton{
+    border: none;
+    background-color: #00628A;
+    color:#fff;
+    width: 220px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    left:3%;
+    top:5%;
+    cursor: pointer;
+}
+#containerr{
+    margin: 50px;
+    margin-top: 150px;
+}
+
+#la{
+    color: red;
+}
+
+.button{
+    width: 120px;
+    height: 40px;
+}

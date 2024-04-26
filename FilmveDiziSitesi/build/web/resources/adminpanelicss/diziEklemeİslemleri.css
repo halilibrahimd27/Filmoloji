@@ -1,0 +1,82 @@
+
+
+.geriButton{
+    border: none;
+    background-color: #00628A;
+    color:#fff;
+    width: 220px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    left:3%;
+    top:5%;
+    cursor: pointer;
+}
+
+#film-islemleri{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    margin-top: 100px;
+    gap: 50px;
+}
+
+.film-container{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 380px;
+
+}
+
+.film-container h1{
+    font-size: 20px;
+    text-align: left;
+}
+
+.filmEkleme{
+    height: 20px;
+    width: 220px;
+}
+
+.ad{
+    margin-left: 30px;
+}
+
+.konu{
+    width: 220px;
+    height: 70px;
+    resize: none;
+}
+
+.tür{
+    margin-left: 27px;
+}
+
+.fragman{
+    margin-left: 35px;
+}
+
+.browsers{
+    width: 220px;
+    height: 30px;
+    margin-left: 15px;
+    font-size: 24px;
+}
+
+.filmEkleButton{
+    border: none;
+    background-color: #00628A;
+    color:#fff;
+    width: 220px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
