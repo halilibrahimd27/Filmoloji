@@ -1,5 +1,4 @@
 
-
 .geriButton{
     border: none;
     background-color: #00628A;
@@ -7,12 +6,15 @@
     width: 220px;
     height: 40px;
     border-radius: 5px;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     position: absolute;
     left:3%;
     top:5%;
     cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 10px;
 }
 
 #film-islemleri{
@@ -26,11 +28,12 @@
 
 .islem{
     border: none;
-    font-size: 24px;
+    font-size: 27px;
     background-color: #fff;
     color:#00729F;
     font-weight: bold;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .islem:hover{

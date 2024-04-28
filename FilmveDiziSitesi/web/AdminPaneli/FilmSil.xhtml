@@ -15,7 +15,9 @@
 
         <div id="containerr"> 
             <h:form>
-                <h:commandButton value="Geri" action="Filmİslemleri.xhtml" styleClass="geriButton" />
+                
+                <h:commandLink value="Geri" action="Filmİslemleri.xhtml" styleClass="geriButton" />
+                
                 <h:dataTable value=" " var="film"  styleClass="table table-striped">
                     <h:column  styleClass="font-weight-bold">
                         <f:facet   name="header">Film'ın Adı</f:facet>
@@ -32,12 +34,12 @@
                     <h:column styleClass="font-weight-bold">
                         <f:facet   name="header">İşlem</f:facet>
                         <h:commandButton styleClass="btn btn-danger button" value="Sil" action="#"  />
-                        
+
                     </h:column>
-                    
+
                 </h:dataTable>
-                
-                
+
+
             </h:form>
         </div>
     </h:body>
