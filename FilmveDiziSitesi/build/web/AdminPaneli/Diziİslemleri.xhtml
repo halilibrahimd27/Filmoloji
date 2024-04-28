@@ -1,20 +1,19 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="jakarta.faces.html">
-    <h:head>
-        <title>Dizi İşlemleri</title>
-        <h:outputStylesheet  name="/adminpanelicss/reset.css" />
-        <h:outputStylesheet  name="/adminpanelicss/diziİslemleri.css" />
-        <script src="https://kit.fontawesome.com/66f2961287.js" crossorigin="anonymous"></script>
-    </h:head>
-    <h:body>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/Templates/İşlemlerTemplate.xhtml">
 
-        <h:form id="film-islemleri">
-            <h:commandLink value="Geri" action="Adminİslemleri.xhtml" styleClass="geriButton" />
-            <h:commandLink value="Dizi Ekle" action="DiziEkle.xhtml" styleClass="islem" />
-            <h:commandLink value="Dizi Sil" action="DiziSil.xhtml" styleClass="islem" />
-        </h:form>
+    <ui:define name="title">Dizi İşlemleri</ui:define>
 
-    </h:body>
-</html>
+    <ui:define name="İşlemlerKısmi">
+        <h:commandLink value="Dizi Ekle" action="DiziEkle.xhtml" styleClass="islem" />
+        <h:commandLink value="Dizi Sil" action="DiziSil.xhtml" styleClass="islem" />
+    </ui:define>
+
+
+
+</ui:composition>
