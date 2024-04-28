@@ -19,15 +19,17 @@
     
     <ui:define name="eklemeKısımlari">
         <h:form id="film-islemleri">
+            
             <div class="film-container">
                 <h1>Dizi Adı : </h1>
                 <h:inputText  value=" " styleClass="filmEkleme ad" ></h:inputText>
             </div>
+            
             <div class="film-container">
                 <h1>Dizi Konusu : </h1>
                 <h:inputTextarea styleClass="filmEkleme konu"  value=" " rows="5" cols="30" />
-
             </div>
+            
             <div class="film-container">
                 <h1>Dizi Türü : </h1>
                 <h:selectOneMenu styleClass="browserss">
@@ -35,6 +37,7 @@
                     <f:selectItem  itemLabel="Yabancı" />
                 </h:selectOneMenu>
             </div>
+            
             <div class="film-container">
                 <h1>Dizi Kategori : </h1>
                 <h:selectManyListbox styleClass="browsersss" value="#" size="5">

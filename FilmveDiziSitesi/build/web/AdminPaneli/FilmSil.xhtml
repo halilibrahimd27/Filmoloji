@@ -16,18 +16,22 @@
 
     <ui:define name="silmeKısımlari">
         <h:dataTable value=" " var="film"  styleClass="table table-striped">
+            
             <h:column  styleClass="font-weight-bold">
                 <f:facet   name="header">Film'ın Adı</f:facet>
                 Recep ivedik 7
             </h:column>
+            
             <h:column styleClass="font-weight-bold">
                 <f:facet   name="header">Film'ın Türü</f:facet>
                 yerli
             </h:column>
+            
             <h:column styleClass="font-weight-bold">
                 <f:facet  name="header">Film'ın Kategorisi</f:facet>
                 komedi,aksiyon
             </h:column>
+            
             <h:column styleClass="font-weight-bold">
                 <f:facet   name="header">İşlem</f:facet>
                 <h:commandButton styleClass="btn btn-danger button" value="Sil" action="#"  />
