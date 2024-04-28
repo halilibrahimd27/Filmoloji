@@ -23,7 +23,13 @@
     color: red;
 }
 
+<<<<<<< HEAD
 .button{
     width: 120px;
     height: 40px;
+=======
+.islem:hover{
+    font-size: 30px;
+     text-decoration: underline;
+>>>>>>> Semih
 }

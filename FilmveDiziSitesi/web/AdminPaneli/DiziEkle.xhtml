@@ -12,7 +12,7 @@
     </h:head>
     <h:body>
 
-        
+
         <h:form id="film-islemleri">
             <h:commandButton value="Geri" action="Diziİslemleri.xhtml" styleClass="geriButton" />
             <div class="film-container">
@@ -26,11 +26,21 @@
             </div>
             <div class="film-container">
                 <h1>Dizi Türü : </h1>
-                <h:inputText  value=" " styleClass="filmEkleme tür"  ></h:inputText>
+                <h:selectOneMenu styleClass="browserss">
+                    <f:selectItem  itemLabel="Yerli" />
+                    <f:selectItem  itemLabel="Yabancı" />
+                </h:selectOneMenu>
             </div>
             <div class="film-container">
                 <h1>Dizi Kategori : </h1>
-                <h:inputText  value=" " styleClass="filmEkleme kategori"  ></h:inputText>
+                <h:selectManyListbox styleClass="browsersss" value="#" size="5">
+                    <f:selectItem itemValue="macera" itemLabel="Hepsi" />
+                    <f:selectItem itemValue="aksiyon" itemLabel="Macera" />
+                    <f:selectItem itemValue="komedi" itemLabel="Aksyion" />
+                    <f:selectItem itemValue="komedi" itemLabel="Komedi" />
+                    <f:selectItem itemValue="komedi" itemLabel="Korku" />
+                    <f:selectItem itemValue="komedi" itemLabel="Bilim Kurgu" />
+                </h:selectManyListbox>
             </div>
 
             <div class="film-container">
@@ -48,7 +58,7 @@
 
             </div>
 
-            <h:commandButton value="Filmi Ekle" action="#" styleClass="filmEkleButton" />
+            <h:commandButton value="Diziyi Ekle" action="#" styleClass="filmEkleButton" />
         </h:form>
 
     </h:body>
