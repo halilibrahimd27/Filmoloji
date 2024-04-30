@@ -16,23 +16,24 @@
     <ui:define name="eklemeKısımlari">
         <h:form id="film-islemleri">
             <div class="film-container">
-                <h1>Film Adı : </h1>
+                <h1>Türü : </h1>
+                <h:selectOneMenu styleClass="browserss">
+                    <f:selectItem  itemLabel="Film" />
+                    <f:selectItem  itemLabel="Dizi" />
+                </h:selectOneMenu>
+            </div>
+
+            <div class="film-container">
+                <h1> Adı : </h1>
                 <h:inputText  value=" " styleClass="filmEkleme ad" ></h:inputText>
             </div>
             <div class="film-container">
-                <h1>Film Konusu : </h1>
+                <h1> Konusu : </h1>
                 <h:inputTextarea styleClass="filmEkleme konu"  value=" " rows="5" cols="30" />
+            </div>
 
-            </div>
             <div class="film-container">
-                <h1>Film Türü : </h1>
-                <h:selectOneMenu styleClass="browserss">
-                    <f:selectItem  itemLabel="Yerli" />
-                    <f:selectItem  itemLabel="Yabancı" />
-                </h:selectOneMenu>
-            </div>
-            <div class="film-container">
-                <h1>Film Kategori : </h1>
+                <h1> Kategorisi : </h1>
                 <h:selectManyListbox styleClass="browsersss" value="#" size="5">
                     <f:selectItem itemValue="macera" itemLabel="Hepsi" />
                     <f:selectItem itemValue="aksiyon" itemLabel="Macera" />
@@ -42,21 +43,31 @@
                     <f:selectItem itemValue="komedi" itemLabel="Bilim Kurgu" />
                 </h:selectManyListbox>
             </div>
-
-            <div class="film-container">
-                <h1>Film Fragmanı : </h1>
-                <input type="file" name="dosya" accept="video/*" class="filmEkleme fragmani" />
+            
+              <div class="film-container">
+                <h1> Yönetmen Adı : </h1>
+                <h:inputText  value=" " styleClass="filmEkleme ad" ></h:inputText>
+            </div>
+            
+             <div class="film-container">
+                <h1> Oyuncular : </h1>
+                <h:inputTextarea styleClass="filmEkleme konu"  value=" " rows="5" cols="30" />
             </div>
 
+<!--            <div class="film-container">
+                <h1>Film Fragmanı : </h1>
+                <input type="file" name="dosya" accept="video/*" class="filmEkleme fragmani" />
+            </div>-->
+
             <div class="film-container">
-                <h1>VizyondaMı : </h1>
+                <h1>Vizyonda ya da TrenddeMi : </h1>
                 <h:selectOneMenu styleClass="browsers">
                     <f:selectItem  itemLabel="Evet" />
                     <f:selectItem  itemLabel="Hayır" />
                 </h:selectOneMenu>
             </div>
 
-            <h:commandButton value="Filmi Ekle" action="#" styleClass="filmEkleButton" />
+            <h:commandButton value="Ekle" action="#" styleClass="filmEkleButton" />
         </h:form>
     </ui:define>
 
