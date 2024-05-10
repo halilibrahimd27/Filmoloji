@@ -37,6 +37,20 @@ public class FilmveDizi {
         kategoriler.add("Bilim-Kurgu");
     }
 
+    public FilmveDizi(int id,String tur, String adi, String konusu, String gönderilecekKategori, String yonetmen_adi, String oyuncular, boolean vizyontrend) {
+        this.id=id;
+        this.tur = tur;
+        this.adi = adi;
+        this.konusu = konusu;
+        this.gönderilecekKategori = gönderilecekKategori;
+        this.yonetmen_adi = yonetmen_adi;
+        this.oyuncular = oyuncular;
+        this.vizyontrend = vizyontrend;
+    }
+    
+    
+    
+
   
     public int getId() {
         return id;

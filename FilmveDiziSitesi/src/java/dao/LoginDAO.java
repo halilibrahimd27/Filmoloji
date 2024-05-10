@@ -19,7 +19,7 @@ public class LoginDAO extends DBConnection{
     
     public Admin getAdmin(String username,String password){
         Admin a= new Admin();
-        a.setId(1);
+        
         a.setUsername(username);
         a.setPassword(password);
         try{

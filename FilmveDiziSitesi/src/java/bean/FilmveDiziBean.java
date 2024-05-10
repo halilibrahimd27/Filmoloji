@@ -28,6 +28,57 @@ public class FilmveDiziBean  implements Serializable {
      public FilmveDiziBean() {
     }
     
+      private int page = 1;
+    private int pageSize = 5;
+    private int pageCount;
+
+    public void next() {
+        if(this.page == this.pageCount) {
+            this.page = 1;
+        }
+        else{
+            this.page++;
+        }
+       
+    }
+
+    public void prev() {
+        if (this.page == 1) {
+            this.page = this.pageCount;
+        }else{
+            this.page--;
+        }
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+        this.pageCount = (int) Math.ceil(this.getDao().count() / (double) pageSize);
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public void delete(FilmveDizi c) {
+        this.getDao().delete(c);
+    }
+
     
     public void create(){
         this.getDao().create(entity);
@@ -57,6 +108,7 @@ public class FilmveDiziBean  implements Serializable {
     }
 
     public List<FilmveDizi> getList() {
+        this.list = this.getDao().getFilmolojiList(page, pageSize);
         return list;
     }
 

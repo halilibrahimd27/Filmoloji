@@ -15,53 +15,65 @@
     </ui:define>
 
     <ui:define name="silmeKısımlari">
-        <h:dataTable value=" " var="film"  styleClass="table table-striped">
-           
+        <h:dataTable value="#{filmveDiziBean.list}" var="film"  styleClass="table table-striped">
+
             <h:column  styleClass="font-weight-bold " style="text-align: center;">
-                <f:facet   name="header" styleClass="orta">Türü</f:facet>
-                Film
+                <f:facet   name="header" styleClass="orta">İD </f:facet>
+                    #{film.id}
+            </h:column>
+
+            <h:column  styleClass="font-weight-bold " style="text-align: center;">
+                <f:facet   name="header" styleClass="orta">Türü </f:facet>
+                    #{film.tur}
             </h:column>
 
             <h:column styleClass="font-weight-bold">
                 <f:facet   name="header">Adı</f:facet>
-                Recep İvedik 7asdsadasddsaasdsaddddddddddddddddddddddddddddd
+                    #{film.adi}
             </h:column>
 
             <h:column styleClass="font-weight-bold">
                 <f:facet  name="header">Konusu</f:facet>
-                Semih temur asd asd asd asd as
+                    #{film.konusu}
             </h:column>
 
             <h:column styleClass="font-weight-bold">
                 <f:facet   name="header">Kategorisi</f:facet>
-                komedi,aksiyon
+                    #{film.gönderilecekKategori}
             </h:column>
 
             <h:column styleClass="font-weight-bold">
                 <f:facet   name="header">Yönetmen Adı</f:facet>
-                Semih Temur
+                    #{film.yonetmen_adi}
             </h:column>
 
             <h:column styleClass="font-weight-bold">
                 <f:facet   name="header">Oyuncular</f:facet>
-                Mervan aykut,Berkay sarıb  asd
+                    #{film.oyuncular}
             </h:column>
 
             <h:column styleClass="font-weight-bold">
                 <f:facet   name="header">Vizyon ya da TrenddeMi</f:facet>
-                Evet
+                    #{film.vizyontrend}
             </h:column>
 
             <h:column styleClass="font-weight-bold" >
                 <f:facet   name="header">İşlem</f:facet>
                 <div class="button-flex">
-                    <h:commandButton styleClass="btn btn-danger button"  value="Sil" action="#"  />
+                    <h:commandButton styleClass="btn btn-danger button"  value="Sil" action="#{filmveDiziBean.delete(film)}"  />
                     <h:commandButton styleClass="btn btn-primary button" value="Güncelle"  action="#"  />
                 </div>
+
+
 
             </h:column>
 
         </h:dataTable>
+
+        <div class="btn-group">
+            <h:commandButton action="#{filmveDiziBean.prev()}" value="geri" styleClass="btn btn-outline-dark"></h:commandButton>
+            <h:commandButton action="#{filmveDiziBean.next()}" value="ileri" styleClass="btn btn-outline-dark"></h:commandButton>
+        </div>
     </ui:define>
 
 </ui:composition>
