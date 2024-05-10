@@ -15,29 +15,31 @@
 
         <div id="containerr"> 
             <h:form>
-                <h:commandLink value="Geri" action="Kullanıcıİslemleri.xhtml" styleClass="geriButton" />
-                
-                <h:dataTable value=" " var="film"  styleClass="table table-striped">
-                    
+                <h:commandLink value="Geri" action="KullanıcıIslemleri.xhtml" styleClass="geriButton" />
+
+                <h:dataTable value="#{kullanıcıBean.list}" var="kullanıcı"  styleClass="table table-striped">
+
                     <h:column  styleClass="font-weight-bold">
-                        <f:facet   name="header">Kullanıcı Adı</f:facet>
-                        
+                        <facet   name="header">Kullanıcı Adı</facet>
+                            #{kullanıcı.kullanıcıadı}
                     </h:column>
-                    
+
                     <h:column styleClass="font-weight-bold">
-                        <f:facet   name="header">Şifre</f:facet>
-                        
+                        <facet   name="header">Şifre</facet>
+                            #{kullanıcı.sifre}
                     </h:column>
-                    
+
                     <h:column styleClass="font-weight-bold">
-                        <f:facet   name="header">İşlem</f:facet>
-                        <h:commandButton styleClass="btn btn-danger button" value="Sil" action="#"  />
-                        
+                        <facet   name="header">Sil</facet>
+                        <h:commandButton styleClass="btn btn-danger button" action="#{kullanıcıBean.delete(kullanıcı)}" value="Sil" />
                     </h:column>
-                    
-                </h:dataTable>     
+                </h:dataTable>
+                <div class="btn-group">
+                    <h:commandButton action="#{filmolojiBean.prev()}" value="geri" styleClass="btn btn-outline-dark"></h:commandButton>
+                    <h:commandButton action="#{filmolojiBean.next()}" value="ileri" styleClass="btn btn-outline-dark"></h:commandButton>
+                </div>   
             </h:form>
-            
+
         </div>
     </h:body>
 </html>

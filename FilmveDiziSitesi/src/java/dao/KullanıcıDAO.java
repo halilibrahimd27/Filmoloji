@@ -4,7 +4,7 @@
  */
 package dao;
 
-import entity.Filmoloji;
+import entity.Kullanıcı;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +14,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class FilmolojiDAO extends DBConnection {
+/**
+ *
+ * @author Halil
+ */
+public class KullanıcıDAO extends DBConnection {
 
     private Connection db;
 
-    public void createFilmDizi(Filmoloji c) {
+    public void createKullanıcı(Kullanıcı c) {
         try {
             String selectMaxIdQuery = "SELECT COALESCE(MAX(df_id), 0) AS max_id FROM dizifilm";
             PreparedStatement selectStatement = this.getDb().prepareStatement(selectMaxIdQuery);
@@ -34,17 +38,11 @@ public class FilmolojiDAO extends DBConnection {
 
             int newId = maxId + 1;
 
-            String insertQuery = "INSERT INTO dizifilm(df_id, tür, adı, konusu, kategori, yönetmenadı, oyuncular, vizyondamitrenddemi) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            String insertQuery = "INSERT INTO kullanıcılar(kullanıcıadı, sifre) VALUES(?, ?)";
             PreparedStatement preparedStatement = this.getDb().prepareStatement(insertQuery);
 
-            preparedStatement.setInt(1, newId);
-            preparedStatement.setString(2, c.getTür());
-            preparedStatement.setString(3, c.getAdı());
-            preparedStatement.setString(4, c.getKonusu());
-            preparedStatement.setString(5, c.getGönderilecekKategori());
-            preparedStatement.setString(6, c.getYönetmenadı());
-            preparedStatement.setString(7, c.getOyuncular());
-            preparedStatement.setString(8, c.getVizyondamitrenddemi());
+            preparedStatement.setString(1, c.getKullanıcıadı());
+            preparedStatement.setString(2, c.getSifre());
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -54,13 +52,13 @@ public class FilmolojiDAO extends DBConnection {
         }
     }
 
-    public void delete(Filmoloji c) {
+    public void delete(Kullanıcı c) {
         try {
 
             Statement st = this.getDb().createStatement();
 
-            String query0 = "UPDATE dizifilm SET df_id = df_id - 1 WHERE df_id > " + c.getDf_id();
-            String query1 = "delete from dizifilm where df_id=" + c.getDf_id();
+            String query0 = "UPDATE kullanıcılar SET kullanıcı_id = kullanıcı_id - 1 WHERE kullanıcı_id > " + c.getKullanıcı_id();
+            String query1 = "delete from kullanıcılar where kullanıcı_id=" + c.getKullanıcı_id();
             st.executeUpdate(query1);
             st.executeUpdate(query0);
 
@@ -70,40 +68,41 @@ public class FilmolojiDAO extends DBConnection {
 
     }
 
-    public List<Filmoloji> getFilmolojiList(int page, int pageSize) {
+    public List<Kullanıcı> getKullanıcıList(int page, int pageSize) {
 
-        List<Filmoloji> categoryList = new ArrayList<>();
+        List<Kullanıcı> kullanıcıList = new ArrayList<>();
 
         int start = ((page - 1) * pageSize);
         int son = start + 5;
         try {
 
-            Statement st = this.getDb().createStatement();
+            Statement st = (Statement) this.getDb().createStatement();
 
-            String query = "SELECT * FROM dizifilm WHERE df_id BETWEEN " + start + " AND " + son;
+            String query = "SELECT * FROM kullanıcılar WHERE kullanıcı_id BETWEEN " + start + " AND " + son;
             ResultSet rs = st.executeQuery(query);
 
             while (rs.next()) {
-                categoryList.add(new Filmoloji(rs.getLong("df_id"), rs.getString("tür"), rs.getString("adı"), rs.getString("konusu"), rs.getString("kategori"), rs.getString("yönetmenadı"), rs.getString("oyuncular"), rs.getString("vizyondamitrenddemi")));
+
+                kullanıcıList.add(new Kullanıcı(rs.getLong("kullanıcı_id"), rs.getLong("df_id"), rs.getString("kullanıcıadı"), rs.getString("sifre")));
             }
 
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return categoryList;
+        return kullanıcıList;
     }
 
     public int count() {
 
         int count = 0;
 
-        List<Filmoloji> categoryList = new ArrayList<>();
+        List<Kullanıcı> kullanıcıList = new ArrayList<>();
 
         try {
 
             Statement st = this.getDb().createStatement();
 
-            String query = "select count(df_id) as film_count from dizifilm";
+            String query = "select count(kullanıcı_id) as film_count from kullanıcılar";
             ResultSet rs = st.executeQuery(query);
             rs.next();
             count = rs.getInt("film_count");
@@ -124,5 +123,4 @@ public class FilmolojiDAO extends DBConnection {
     public void setDb(Connection db) {
         this.db = db;
     }
-
 }

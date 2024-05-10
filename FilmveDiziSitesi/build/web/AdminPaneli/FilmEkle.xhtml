@@ -7,42 +7,45 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="/Templates/EklemeTemplate.xhtml">
 
-    <ui:define name="title">Film ve Dizi Ekleme İşlemleri </ui:define>
+    <ui:define name="title">Film ve Dizi Ekle </ui:define>
 
     <ui:define name="geriButtonTemplate">
-        <h:commandLink value="Geri" action="Filmİslemleri.xhtml" styleClass="geriButton" />
+        <h:commandLink value="Geri" action="FilmIslemleri.xhtml" styleClass="geriButton" />
     </ui:define>
 
     <ui:define name="eklemeKısımlari">
         <h:form id="film-islemleri">
             <div class="film-container">
                 <h1>Türü : </h1>
-                <h:inputText  value="#{filmolojiBean.entity.tür}" styleClass="filmEkleme " ></h:inputText>
+                <h:selectOneMenu styleClass="browserss" value="#{filmolojiBean.entity.tür}">
+                    <f:selectItems value="#{filmolojiBean.entity.turarray}" var="turler" itemValue="#{turler}" />
+                </h:selectOneMenu>
             </div>
 
             <div class="film-container">
                 <h1> Adı : </h1>
-                <h:inputText  value="#{filmolojiBean.entity.adı}" styleClass="filmEkleme" ></h:inputText>
+                <h:inputText  value="#{filmolojiBean.entity.adı}" styleClass="filmEkleme ad" ></h:inputText>
             </div>
             <div class="film-container">
                 <h1> Konusu : </h1>
-                <h:inputTextarea styleClass="filmEkleme konu"  value="#{filmolojiBean.entity.konusu}" />
+                <h:inputTextarea styleClass="filmEkleme konu"  value="#{filmolojiBean.entity.konusu}" rows="5" cols="30" />
             </div>
 
             <div class="film-container">
                 <h1> Kategorisi : </h1>
-                <h:inputText  value="#{filmolojiBean.entity.kategori}" styleClass="filmEkleme" ></h:inputText>
-
+                <h:selectManyListbox styleClass="browsersss" value="#{filmolojiBean.entity.secilenkategoriler}" size="5">
+                    <f:selectItems value="#{filmolojiBean.entity.kategoriler}" var="kategoriler" itemValue="#{kategoriler}" />
+                </h:selectManyListbox>
             </div>
 
             <div class="film-container">
                 <h1> Yönetmen Adı : </h1>
-                <h:inputText  value="#{filmolojiBean.entity.yönetmenadı}" styleClass="filmEkleme" ></h:inputText>
+                <h:inputText  value="#{filmolojiBean.entity.yönetmenadı}" styleClass="filmEkleme adi" ></h:inputText>
             </div>
 
             <div class="film-container">
                 <h1> Oyuncular : </h1>
-                <h:inputTextarea styleClass="filmEkleme konu"  value="#{filmolojiBean.entity.oyuncular}"/>
+                <h:inputTextarea styleClass="filmEkleme konu"  value="#{filmolojiBean.entity.oyuncular}" rows="5" cols="30" />
             </div>
 
             <!--            <div class="film-container">
@@ -52,10 +55,12 @@
 
             <div class="film-container">
                 <h1>Vizyonda ya da TrenddeMi : </h1>
-                <h:inputText  value="#{filmolojiBean.entity.vizyondamitrenddemi}" styleClass="filmEkleme" ></h:inputText>
+                <h:selectOneMenu styleClass="browsers" value="#{filmolojiBean.entity.seçilenVizyonTrends}">
+                    <f:selectItems value="#{filmolojiBean.entity.vizyontrendarray}" var="vizyontrend" itemValue="#{vizyontrend}" />
+                </h:selectOneMenu>
             </div>
 
-            <h:commandButton action="#{filmolojiBean.create()}" value="Kaydet"/>
+            <h:commandButton value="Ekle" action="#{filmolojiBean.create()}" styleClass="Kaydet" />
         </h:form>
     </ui:define>
 

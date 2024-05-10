@@ -11,7 +11,7 @@
     <ui:define name="title">Film ve Dizi Silme İşlemleri</ui:define>
 
     <ui:define name="geriButtonTemplate">
-        <h:commandLink value="Geri" action="Filmİslemleri.xhtml" styleClass="geriButton" />
+        <h:commandLink value="Geri" action="FilmIslemleri.xhtml" styleClass="geriButton" />
     </ui:define>
 
     <ui:define name="silmeKısımlari">
@@ -34,17 +34,17 @@
 
             <h:column  styleClass="font-weight-bold">
                 <f:facet   name="header">Kategori</f:facet>
-                <br>#{dizifilm.kategori}</br>
+                <br>#{dizifilm.gönderilecekKategori}</br>
             </h:column>
 
             <h:column  styleClass="font-weight-bold">
-                <f:facet   name="header">yönetmenadı</f:facet>
+                <f:facet   name="header">Yönetmenadı</f:facet>
                 <br>#{dizifilm.yönetmenadı}</br>
             </h:column>
 
 
             <h:column styleClass="font-weight-bold">
-                <f:facet   name="header">oyuncular</f:facet>
+                <f:facet   name="header">Oyuncular</f:facet>
                 <br>#{dizifilm.oyuncular}</br>
             </h:column>
 
@@ -54,8 +54,9 @@
             </h:column>
 
             <h:column styleClass="font-weight-bold">
-                <f:facet   name="header">Sil</f:facet>
+                <f:facet   name="header">İslemler</f:facet>
                 <h:commandButton styleClass="btn btn-danger button" action="#{filmolojiBean.delete(dizifilm)}" value="Sil" />
+                <h:commandButton styleClass="btn btn-info button" action="#{filmolojiBean.update(dizifilm)}" value="Güncelle" />
             </h:column>
         </h:dataTable>
         <div class="btn-group">

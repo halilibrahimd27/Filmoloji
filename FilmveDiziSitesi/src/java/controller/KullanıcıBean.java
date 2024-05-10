@@ -4,8 +4,8 @@
  */
 package controller;
 
-import dao.FilmolojiDAO;
-import entity.Filmoloji;
+import dao.KullanıcıDAO;
+import entity.Kullanıcı;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -16,15 +16,15 @@ import java.util.List;
  *
  * @author Halil
  */
-@Named(value = "filmolojiBean")
+@Named(value = "kullanıcıBean")
 @SessionScoped
-public class FilmolojiBean implements Serializable {
+public class KullanıcıBean implements Serializable {
 
-    private Filmoloji entity;
-    private FilmolojiDAO dao;
-    private List<Filmoloji> list;
+    private Kullanıcı entity;
+    private KullanıcıDAO dao;
+    private List<Kullanıcı> list;
 
-    public FilmolojiBean() {
+    public KullanıcıBean() {
     }
 
     private int page = 1;
@@ -70,48 +70,55 @@ public class FilmolojiBean implements Serializable {
         return pageCount;
     }
 
+    public KullanıcıBean(Kullanıcı entity, KullanıcıDAO dao, List<Kullanıcı> list, int pageCount) {
+        this.entity = entity;
+        this.dao = dao;
+        this.list = list;
+        this.pageCount = pageCount;
+    }
+
     public void setPageCount(int pageCount) {
         this.pageCount = pageCount;
     }
 
-    public void delete(Filmoloji c) {
+    public void delete(Kullanıcı c) {
         this.getDao().delete(c);
     }
 
     public void create() {
-        this.getDao().createFilmDizi(this.entity);
-        this.entity = new Filmoloji();
+        this.getDao().createKullanıcı(entity);
+        this.entity = new Kullanıcı();
     }
 
-    public Filmoloji getEntity() {
+    public Kullanıcı getEntity() {
         if (this.entity == null) {
-            this.entity = new Filmoloji();
+            this.entity = new Kullanıcı();
         }
         return entity;
     }
 
-    public void setEntity(Filmoloji entity) {
+    public void setEntity(Kullanıcı entity) {
         this.entity = entity;
     }
 
-    public FilmolojiDAO getDao() {
+    public KullanıcıDAO getDao() {
         if (this.dao == null) {
-            this.dao = new FilmolojiDAO();
+            this.dao = new KullanıcıDAO();
         }
         return dao;
     }
 
-    public void setDao(FilmolojiDAO dao) {
+    public void setDao(KullanıcıDAO dao) {
         this.dao = dao;
     }
 
-    public List<Filmoloji> getList(){
-        this.list = this.getDao().getFilmolojiList(page, pageSize);
+    public List<Kullanıcı> getList() throws SQLException {
+        this.list = this.getDao().getKullanıcıList(page, pageSize);
         return list;
     }
 
-    public void setList(List<Filmoloji> list) {
+    public void setList(List<Kullanıcı> list) {
         this.list = list;
     }
-
+    
 }
