@@ -13,7 +13,7 @@ public abstract class DBConnection {
         Connection c = null;
         try {
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "123456");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Filmoloji", "postgres", "123456");
             System.out.println("Başarili");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

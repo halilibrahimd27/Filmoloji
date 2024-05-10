@@ -11,6 +11,7 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.event.ValueChangeEvent;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -74,16 +75,24 @@ public class FilmveDiziBean  implements Serializable {
     public void setPageCount(int pageCount) {
         this.pageCount = pageCount;
     }
+    
+     public void create(){
+        this.getDao().create(entity);
+        this.entity=new FilmveDizi();
+    }
+    
+    
+      public void update() throws SQLException  {
+        this.getDao().update(entity);
+        entity=new FilmveDizi();
+    }
 
     public void delete(FilmveDizi c) {
         this.getDao().delete(c);
     }
 
-    
-    public void create(){
-        this.getDao().create(entity);
-        this.entity=new FilmveDizi();
-    }
+   
+  
 
     public FilmveDizi getEntity() {
         if(this.entity==null){
@@ -116,7 +125,11 @@ public class FilmveDiziBean  implements Serializable {
         this.list = list;
     }
    
-    
+    public String navigateToGuncellePage(int id) {
+         entity = new FilmveDizi();
+         entity.setId(id);
+         return "/AdminPaneli/FilmveDiziGuncelle?faces-redirect=true";
+    }
  
    
 }

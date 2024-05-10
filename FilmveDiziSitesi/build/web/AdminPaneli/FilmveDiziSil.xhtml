@@ -17,51 +17,51 @@
     <ui:define name="silmeKısımlari">
         <h:dataTable value="#{filmveDiziBean.list}" var="film"  styleClass="table table-striped">
 
-            <h:column  styleClass="font-weight-bold " style="text-align: center;">
-                <f:facet   name="header" styleClass="orta">İD </f:facet>
-                    #{film.id}
+           <h:column  styleClass="font-weight-bold " style="text-align: center;">
+                <f:facet   name="header" styleClass="orta">İD</f:facet>
+                <p style="text-align: center;">#{film.id} </p>
             </h:column>
 
             <h:column  styleClass="font-weight-bold " style="text-align: center;">
-                <f:facet   name="header" styleClass="orta">Türü </f:facet>
-                    #{film.tur}
+                <f:facet   name="header" styleClass="orta">Türü</f:facet>
+                <p style="text-align: center;">#{film.tur} </p>   
             </h:column>
 
-            <h:column styleClass="font-weight-bold">
+            <h:column styleClass="font-weight-bold"  style="text-align: center;">
                 <f:facet   name="header">Adı</f:facet>
-                    #{film.adi}
+                <p style="text-align: center;"> #{film.adi} </p>
             </h:column>
 
-            <h:column styleClass="font-weight-bold">
+            <h:column styleClass="font-weight-bold"  style="text-align: center;">
                 <f:facet  name="header">Konusu</f:facet>
-                    #{film.konusu}
+                <p style="text-align: center;">#{film.konusu} </p> 
             </h:column>
 
-            <h:column styleClass="font-weight-bold">
+            <h:column styleClass="font-weight-bold"  style="text-align: center;">
                 <f:facet   name="header">Kategorisi</f:facet>
-                    #{film.gönderilecekKategori}
+                <p style="text-align: center;">#{film.gönderilecekKategori}</p>
             </h:column>
 
-            <h:column styleClass="font-weight-bold">
+            <h:column styleClass="font-weight-bold"  style="text-align: center;">
                 <f:facet   name="header">Yönetmen Adı</f:facet>
-                    #{film.yonetmen_adi}
+                <p style="text-align: center;"> #{film.yonetmen_adi} </p>
             </h:column>
 
-            <h:column styleClass="font-weight-bold">
+            <h:column styleClass="font-weight-bold"  style="text-align: center;">
                 <f:facet   name="header">Oyuncular</f:facet>
-                    #{film.oyuncular}
+                <p  style="text-align: center;">#{film.oyuncular}</p>
             </h:column>
 
-            <h:column styleClass="font-weight-bold">
+            <h:column styleClass="font-weight-bold"  style="text-align: center;">
                 <f:facet   name="header">Vizyon ya da TrenddeMi</f:facet>
-                    #{film.vizyontrend}
+                <p style="text-align: center;">#{film.vizyontrendd}</p>
             </h:column>
 
             <h:column styleClass="font-weight-bold" >
                 <f:facet   name="header">İşlem</f:facet>
                 <div class="button-flex">
                     <h:commandButton styleClass="btn btn-danger button"  value="Sil" action="#{filmveDiziBean.delete(film)}"  />
-                    <h:commandButton styleClass="btn btn-primary button" value="Güncelle"  action="#"  />
+                    <h:commandButton styleClass="btn btn-primary button" value="Güncelle"  action="#{filmveDiziBean.navigateToGuncellePage(film.id)}"  />
                 </div>
 
 

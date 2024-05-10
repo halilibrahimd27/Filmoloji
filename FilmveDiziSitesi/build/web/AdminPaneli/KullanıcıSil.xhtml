@@ -17,21 +17,21 @@
             <h:form>
                 <h:commandLink value="Geri" action="Kullanıcıİslemleri.xhtml" styleClass="geriButton" />
                 
-                <h:dataTable value=" " var="film"  styleClass="table table-striped">
+                <h:dataTable value="#{kullanıcıBean.list}" var="film"  styleClass="table table-striped">
                     
                     <h:column  styleClass="font-weight-bold">
                         <f:facet   name="header">Kullanıcı Adı</f:facet>
-                        Semih
+                        #{film.kullanıcıadı}
                     </h:column>
                     
                     <h:column styleClass="font-weight-bold">
                         <f:facet   name="header">Şifre</f:facet>
-                        1234
+                        #{film.sifre}
                     </h:column>
                     
                     <h:column styleClass="font-weight-bold">
                         <f:facet   name="header">İşlem</f:facet>
-                        <h:commandButton styleClass="btn btn-danger button" value="Sil" action="#"  />
+                        <h:commandButton styleClass="btn btn-danger button" value="Sil" action="#{kullanıcıBean.delete(film)}"  />
                         
                     </h:column>
                     

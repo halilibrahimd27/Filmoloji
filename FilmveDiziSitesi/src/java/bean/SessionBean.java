@@ -26,14 +26,16 @@ public class SessionBean implements Serializable{
     private String password;
     private Admin admin;
     private LoginDAO ldao;
+    private String username2;
+    private  String password2;
 
     public SessionBean() {
     }
     
     public String login(){
         Admin admin = this.getLdao().getAdmin(this.username, this.password);
-        if(admin!=null){
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("admin", admin);
+        if((getUsername2().equals("mervan")) && (getPassword2().equals("123"))){
+        //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("admin", admin);
         return "/AdminPaneli/AdminIslemleri?faces-redirect=true";
         }
         else{
@@ -41,6 +43,24 @@ public class SessionBean implements Serializable{
             return"/AdminPaneli/Admin?faces-redirect=true";
         }
     }
+
+    public String getUsername2() {
+        return username2;
+    }
+
+    public void setUsername2(String username2) {
+        this.username2 = username2;
+    }
+
+    public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }
+    
+    
 
     public Admin getAdmin() {
         return admin;
@@ -62,6 +82,7 @@ public class SessionBean implements Serializable{
     }
 
     public String getUsername() {
+        
         return username;
     }
 

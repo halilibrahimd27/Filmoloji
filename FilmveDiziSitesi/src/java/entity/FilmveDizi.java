@@ -26,6 +26,7 @@ public class FilmveDizi {
     private String oyuncular;
     private String[] vizyontrendarray = {"Evet", "Hayır"};
     private String seçilenVizyonTrends;
+    private String vizyontrendd;
     private boolean vizyontrend;
 
     public FilmveDizi() {
@@ -37,8 +38,8 @@ public class FilmveDizi {
         kategoriler.add("Bilim-Kurgu");
     }
 
-    public FilmveDizi(int id,String tur, String adi, String konusu, String gönderilecekKategori, String yonetmen_adi, String oyuncular, boolean vizyontrend) {
-        this.id=id;
+    public FilmveDizi(int id, String tur, String adi, String konusu, String gönderilecekKategori, String yonetmen_adi, String oyuncular, boolean vizyontrend) {
+        this.id = id;
         this.tur = tur;
         this.adi = adi;
         this.konusu = konusu;
@@ -46,12 +47,15 @@ public class FilmveDizi {
         this.yonetmen_adi = yonetmen_adi;
         this.oyuncular = oyuncular;
         this.vizyontrend = vizyontrend;
-    }
-    
-    
-    
 
-  
+        if (this.vizyontrend) {
+            this.setVizyontrendd("Evet");
+        } else {
+            this.setVizyontrendd("Hayır");
+        }
+
+    }
+
     public int getId() {
         return id;
     }
@@ -102,7 +106,7 @@ public class FilmveDizi {
 
     public void setSecilenkategoriler(List<String> secilenkategoriler) {
         this.secilenkategoriler = secilenkategoriler;
-        System.out.println("hozam"+this.secilenkategoriler);
+        System.out.println("hozam" + this.secilenkategoriler);
         StringBuilder builder = new StringBuilder();
         for (String deger : this.secilenkategoriler) {
             if (builder.length() > 0) {
@@ -111,7 +115,7 @@ public class FilmveDizi {
             builder.append(deger);
         }
         this.gönderilecekKategori = builder.toString();
-        System.out.println("as"+this.gönderilecekKategori);
+        System.out.println("as" + this.gönderilecekKategori);
 
     }
 
@@ -130,7 +134,7 @@ public class FilmveDizi {
     public void setGönderilecekKategori(String gönderilecekKategori) {
         this.gönderilecekKategori = gönderilecekKategori;
     }
-    
+
     public String getYonetmen_adi() {
         return yonetmen_adi;
     }
@@ -170,6 +174,14 @@ public class FilmveDizi {
         }
     }
 
+    public String getVizyontrendd() {
+        return vizyontrendd;
+    }
+
+    public void setVizyontrendd(String vizyontrendd) {
+        this.vizyontrendd = vizyontrendd;
+    }
+
     public boolean isVizyontrend() {
         return vizyontrend;
     }
@@ -177,9 +189,5 @@ public class FilmveDizi {
     public void setVizyontrend(boolean vizyontrend) {
         this.vizyontrend = vizyontrend;
     }
-
-  
-    
-    
 
 }

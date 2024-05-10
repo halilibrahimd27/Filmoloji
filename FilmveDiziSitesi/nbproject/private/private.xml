@@ -3,9 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/MERVAN/Desktop/filmvedizii/src/java/bean/SessionBean.java</file>
-            <file>file:/C:/Users/MERVAN/Desktop/filmvedizii/web/AdminPaneli/Admin.xhtml</file>
-            <file>file:/C:/Users/MERVAN/Desktop/filmvedizii/src/java/dao/FilmveDiziDao.java</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/dao/FilmveDiziDao.java</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/bean/SessionBean.java</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/FilmveDiziİslemleri.xhtml</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/util/LoginFilter.java</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/FilmveDiziEkle.xhtml</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/FilmveDiziGüncelle.xhtml</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/util/DBConnection.java</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/AdminIslemleri.xhtml</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/dao/LoginDAO.java</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/Admin.xhtml</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/FilmveDiziSil.xhtml</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/bean/FilmveDiziBean.java</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/entity/FilmveDizi.java</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/entity/Admin.java</file>
         </group>
     </open-files>
 </project-private>

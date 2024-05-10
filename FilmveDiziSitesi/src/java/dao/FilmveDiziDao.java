@@ -6,6 +6,7 @@ package dao;
 
 import entity.FilmveDizi;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,24 @@ public class FilmveDiziDao extends DBConnection {
         return categoryList;
     }
 
+    public void update(FilmveDizi fd) throws SQLException  {
+
+        Statement st = (Statement) this.getConnect().createStatement();
+        String sql = "UPDATE filmvedizi SET "
+                + "tur='" + fd.getTur() + "', "
+                + "adi='" + fd.getAdi() + "', "
+                + "konusu='" + fd.getKonusu() + "', "
+                + "kategorisi='" + fd.getGönderilecekKategori() + "', "
+                + "yonetmen_adi='" + fd.getYonetmen_adi() + "', "
+                + "oyuncular='" + fd.getOyuncular() + "', "
+                + "vizyontrend=" + (fd.isVizyontrend()) + " "
+                + "WHERE id=" + fd.getId();
+
+        st.executeUpdate(sql);
+
+    }
+    
+    
     public void delete(FilmveDizi fd) {
         try {
 
@@ -76,9 +95,7 @@ public class FilmveDiziDao extends DBConnection {
 
     }
     
-    public void update(FilmveDizi fd){
     
-    }
 
     public int count() {
 
