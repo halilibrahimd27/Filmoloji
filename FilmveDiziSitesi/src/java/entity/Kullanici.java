@@ -8,41 +8,41 @@ package entity;
  *
  * @author Halil
  */
-public class Kullanıcı {
+public class Kullanici {
     
     private String kullanıcıadı;
     private String sifre;
-    private Long kullanıcı_id;
+    private Long kullanici_id;
     private Long df_id;
 
-    public Kullanıcı(Long kullanıcı_id, String kullanıcıadı, String sifre) {
-        this.kullanıcı_id = kullanıcı_id;
+    public Kullanici(Long kullanici_id, String kullanıcıadı, String sifre) {
+        this.kullanici_id = kullanici_id;
         this.kullanıcıadı = kullanıcıadı;
         this.sifre = sifre;
     }
 
 
-    public Kullanıcı() {
+    public Kullanici() {
     }
 
-    public Kullanıcı(String kullanıcıadı, String sifre) {
+    public Kullanici(String kullanıcıadı, String sifre) {
         this.kullanıcıadı = kullanıcıadı;
         this.sifre = sifre;
     }
 
-    public Kullanıcı(Long kullanıcı_id, Long df_id, String kullanıcıadı, String sifre) {
-        this.kullanıcı_id = kullanıcı_id;
+    public Kullanici(Long kullanici_id, Long df_id, String kullanıcıadı, String sifre) {
+        this.kullanici_id = kullanici_id;
         this.df_id = df_id;
         this.kullanıcıadı = kullanıcıadı;
         this.sifre = sifre;
     }
 
-    public Long getKullanıcı_id() {
-        return kullanıcı_id;
+    public Long getKullanici_id() {
+        return kullanici_id;
     }
 
-    public void setKullanıcı_id(Long kullanıcı_id) {
-        this.kullanıcı_id = kullanıcı_id;
+    public void setKullanici_id(Long kullanici_id) {
+        this.kullanici_id = kullanici_id;
     }
 
     public Long getDf_id() {

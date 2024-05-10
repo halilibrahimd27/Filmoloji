@@ -4,7 +4,7 @@
  */
 package dao;
 
-import entity.Kullanıcı;
+import entity.Kullanici;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class KullanıcıDAO extends DBConnection {
 
     private Connection db;
 
-    public void createKullanıcı(Kullanıcı c) {
+    public void createKullanıcı(Kullanici c) {
         try {
             String selectMaxIdQuery = "SELECT COALESCE(MAX(df_id), 0) AS max_id FROM dizifilm";
             PreparedStatement selectStatement = this.getDb().prepareStatement(selectMaxIdQuery);
@@ -38,11 +38,12 @@ public class KullanıcıDAO extends DBConnection {
 
             int newId = maxId + 1;
 
-            String insertQuery = "INSERT INTO kullanıcılar(kullanıcıadı, sifre) VALUES(?, ?)";
+            String insertQuery = "INSERT INTO kullanıcılar(kullanici_id, kullanıcıadı, sifre) VALUES(?, ?, ?)";
             PreparedStatement preparedStatement = this.getDb().prepareStatement(insertQuery);
 
-            preparedStatement.setString(1, c.getKullanıcıadı());
-            preparedStatement.setString(2, c.getSifre());
+            preparedStatement.setInt(1, newId);
+            preparedStatement.setString(2, c.getKullanıcıadı());
+            preparedStatement.setString(3, c.getSifre());
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -52,13 +53,13 @@ public class KullanıcıDAO extends DBConnection {
         }
     }
 
-    public void delete(Kullanıcı c) {
+    public void delete(Kullanici c) {
         try {
 
             Statement st = this.getDb().createStatement();
 
-            String query0 = "UPDATE kullanıcılar SET kullanıcı_id = kullanıcı_id - 1 WHERE kullanıcı_id > " + c.getKullanıcı_id();
-            String query1 = "delete from kullanıcılar where kullanıcı_id=" + c.getKullanıcı_id();
+            String query0 = "UPDATE kullanıcılar SET kullanici_id = kullanici_id - 1 WHERE kullanici_id > " + c.getKullanici_id();
+            String query1 = "delete from kullanıcılar where kullanici_id=" + c.getKullanici_id();
             st.executeUpdate(query1);
             st.executeUpdate(query0);
 
@@ -68,9 +69,9 @@ public class KullanıcıDAO extends DBConnection {
 
     }
 
-    public List<Kullanıcı> getKullanıcıList(int page, int pageSize) {
+    public List<Kullanici> getKullanıcıList(int page, int pageSize) {
 
-        List<Kullanıcı> kullanıcıList = new ArrayList<>();
+        List<Kullanici> kullanıcıList = new ArrayList<>();
 
         int start = ((page - 1) * pageSize);
         int son = start + 5;
@@ -78,12 +79,12 @@ public class KullanıcıDAO extends DBConnection {
 
             Statement st = (Statement) this.getDb().createStatement();
 
-            String query = "SELECT * FROM kullanıcılar WHERE kullanıcı_id BETWEEN " + start + " AND " + son;
+            String query = "SELECT * FROM kullanıcılar WHERE kullanici_id BETWEEN " + start + " AND " + son;
             ResultSet rs = st.executeQuery(query);
 
             while (rs.next()) {
 
-                kullanıcıList.add(new Kullanıcı(rs.getLong("kullanıcı_id"), rs.getLong("df_id"), rs.getString("kullanıcıadı"), rs.getString("sifre")));
+                kullanıcıList.add(new Kullanici(rs.getLong("kullanici_id"), rs.getLong("df_id"), rs.getString("kullanıcıadı"), rs.getString("sifre")));
             }
 
         } catch (SQLException ex) {
@@ -96,13 +97,13 @@ public class KullanıcıDAO extends DBConnection {
 
         int count = 0;
 
-        List<Kullanıcı> kullanıcıList = new ArrayList<>();
+        List<Kullanici> kullanıcıList = new ArrayList<>();
 
         try {
 
             Statement st = this.getDb().createStatement();
 
-            String query = "select count(kullanıcı_id) as film_count from kullanıcılar";
+            String query = "select count(kullanici_id) as film_count from kullanıcılar";
             ResultSet rs = st.executeQuery(query);
             rs.next();
             count = rs.getInt("film_count");

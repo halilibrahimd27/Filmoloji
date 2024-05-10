@@ -5,7 +5,7 @@
 package controller;
 
 import dao.KullanıcıDAO;
-import entity.Kullanıcı;
+import entity.Kullanici;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -20,9 +20,9 @@ import java.util.List;
 @SessionScoped
 public class KullanıcıBean implements Serializable {
 
-    private Kullanıcı entity;
+    private Kullanici entity;
     private KullanıcıDAO dao;
-    private List<Kullanıcı> list;
+    private List<Kullanici> list;
 
     public KullanıcıBean() {
     }
@@ -70,7 +70,7 @@ public class KullanıcıBean implements Serializable {
         return pageCount;
     }
 
-    public KullanıcıBean(Kullanıcı entity, KullanıcıDAO dao, List<Kullanıcı> list, int pageCount) {
+    public KullanıcıBean(Kullanici entity, KullanıcıDAO dao, List<Kullanici> list, int pageCount) {
         this.entity = entity;
         this.dao = dao;
         this.list = list;
@@ -81,23 +81,23 @@ public class KullanıcıBean implements Serializable {
         this.pageCount = pageCount;
     }
 
-    public void delete(Kullanıcı c) {
+    public void delete(Kullanici c) {
         this.getDao().delete(c);
     }
 
     public void create() {
         this.getDao().createKullanıcı(entity);
-        this.entity = new Kullanıcı();
+        this.entity = new Kullanici();
     }
 
-    public Kullanıcı getEntity() {
+    public Kullanici getEntity() {
         if (this.entity == null) {
-            this.entity = new Kullanıcı();
+            this.entity = new Kullanici();
         }
         return entity;
     }
 
-    public void setEntity(Kullanıcı entity) {
+    public void setEntity(Kullanici entity) {
         this.entity = entity;
     }
 
@@ -112,12 +112,12 @@ public class KullanıcıBean implements Serializable {
         this.dao = dao;
     }
 
-    public List<Kullanıcı> getList() throws SQLException {
+    public List<Kullanici> getList(){
         this.list = this.getDao().getKullanıcıList(page, pageSize);
         return list;
     }
 
-    public void setList(List<Kullanıcı> list) {
+    public void setList(List<Kullanici> list) {
         this.list = list;
     }
     

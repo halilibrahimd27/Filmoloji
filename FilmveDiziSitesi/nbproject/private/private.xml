@@ -5,11 +5,13 @@
         <group>
             <file>file:/C:/Users/Halil%20İbrahim/Desktop/Programlama/Java/semih/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/AdminIslemleri.xhtml</file>
             <file>file:/C:/Users/Halil%20İbrahim/Desktop/Programlama/Java/semih/Filmoloji/FilmveDiziSitesi/src/java/controller/KullanıcıBean.java</file>
+            <file>file:/C:/Users/Halil%20İbrahim/Desktop/Programlama/Java/semih/Filmoloji/FilmveDiziSitesi/src/java/entity/Kullanici.java</file>
             <file>file:/C:/Users/Halil%20İbrahim/Desktop/Programlama/Java/semih/Filmoloji/FilmveDiziSitesi/src/java/dao/FilmolojiDAO.java</file>
             <file>file:/C:/Users/Halil%20İbrahim/Desktop/Programlama/Java/semih/Filmoloji/FilmveDiziSitesi/src/java/util/DBConnection.java</file>
             <file>file:/C:/Users/Halil%20İbrahim/Desktop/Programlama/Java/semih/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/KullanıcıEkle.xhtml</file>
             <file>file:/C:/Users/Halil%20İbrahim/Desktop/Programlama/Java/semih/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/FilmSil.xhtml</file>
             <file>file:/C:/Users/Halil%20İbrahim/Desktop/Programlama/Java/semih/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/FilmEkle.xhtml</file>
+            <file>file:/C:/Users/Halil%20İbrahim/Desktop/Programlama/Java/semih/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/Yorumlar.xhtml</file>
             <file>file:/C:/Users/Halil%20İbrahim/Desktop/Programlama/Java/semih/Filmoloji/FilmveDiziSitesi/web/Templates/İşlemlerTemplate.xhtml</file>
             <file>file:/C:/Users/Halil%20İbrahim/Desktop/Programlama/Java/semih/Filmoloji/FilmveDiziSitesi/src/java/dao/KullanıcıDAO.java</file>
             <file>file:/C:/Users/Halil%20İbrahim/Desktop/Programlama/Java/semih/Filmoloji/FilmveDiziSitesi/src/java/dao/LoginDAO.java</file>
@@ -25,7 +27,6 @@
             <file>file:/C:/Users/Halil%20İbrahim/Desktop/Programlama/Java/semih/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/FilmIslemleri.xhtml</file>
             <file>file:/C:/Users/Halil%20İbrahim/Desktop/Programlama/Java/semih/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/KullanıcıSil.xhtml</file>
             <file>file:/C:/Users/Halil%20İbrahim/Desktop/Programlama/Java/semih/Filmoloji/FilmveDiziSitesi/src/java/entity/Filmoloji.java</file>
-            <file>file:/C:/Users/Halil%20İbrahim/Desktop/Programlama/Java/semih/Filmoloji/FilmveDiziSitesi/src/java/entity/Kullanıcı.java</file>
         </group>
     </open-files>
 </project-private>
