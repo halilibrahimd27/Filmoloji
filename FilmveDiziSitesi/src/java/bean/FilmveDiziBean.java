@@ -2,32 +2,30 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
  */
-package controller;
+package bean;
 
-import dao.FilmolojiDAO;
-import entity.Filmoloji;
+import dao.FilmveDiziDao;
+import entity.FilmveDizi;
 import jakarta.inject.Named;
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.event.ValueChangeEvent;
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.List;
 
-/**
- *
- * @author Halil
- */
-@Named(value = "filmolojiBean")
+
+@Named(value = "filmveDiziBean")
 @SessionScoped
-public class FilmolojiBean implements Serializable {
-
-    private Filmoloji entity;
-    private FilmolojiDAO dao;
-    private List<Filmoloji> list;
-
-    public FilmolojiBean() {
+public class FilmveDiziBean  implements Serializable {
+    
+    private FilmveDizi entity;
+    private FilmveDiziDao dao;
+    private List<FilmveDizi> list;
+    
+     public FilmveDiziBean() {
     }
-
-    private int page = 1;
+    
+      private int page = 1;
     private int pageSize = 5;
     private int pageCount;
 
@@ -74,44 +72,52 @@ public class FilmolojiBean implements Serializable {
         this.pageCount = pageCount;
     }
 
-    public void delete(Filmoloji c) {
+    public void delete(FilmveDizi c) {
         this.getDao().delete(c);
     }
-
-    public void create() {
-        this.getDao().createFilmDizi(this.entity);
-        this.entity = new Filmoloji();
+    public void update(FilmveDizi c) {
+        this.getDao().update(entity);
+        this.entity=new FilmveDizi();
     }
 
-    public Filmoloji getEntity() {
-        if (this.entity == null) {
-            this.entity = new Filmoloji();
+    
+    public void create(){
+        this.getDao().create(entity);
+        this.entity=new FilmveDizi();
+    }
+
+    public FilmveDizi getEntity() {
+        if(this.entity==null){
+            entity=new FilmveDizi();
         }
         return entity;
     }
 
-    public void setEntity(Filmoloji entity) {
+    public void setEntity(FilmveDizi entity) {
         this.entity = entity;
     }
 
-    public FilmolojiDAO getDao() {
-        if (this.dao == null) {
-            this.dao = new FilmolojiDAO();
+    public FilmveDiziDao getDao() {
+        if(this.dao==null){
+            this.dao=new FilmveDiziDao();
         }
         return dao;
     }
 
-    public void setDao(FilmolojiDAO dao) {
+    public void setDao(FilmveDiziDao dao) {
         this.dao = dao;
     }
 
-    public List<Filmoloji> getList() throws SQLException {
+    public List<FilmveDizi> getList() {
         this.list = this.getDao().getFilmolojiList(page, pageSize);
         return list;
     }
 
-    public void setList(List<Filmoloji> list) {
+    public void setList(List<FilmveDizi> list) {
         this.list = list;
     }
-
+   
+    
+ 
+   
 }

@@ -3,6 +3,8 @@ window.onload = function () {
     var exit = document.getElementById('exit');
     girişMenu.addEventListener("click", open);
     exit.addEventListener("click", exits);
+    
+    
 
 };
 

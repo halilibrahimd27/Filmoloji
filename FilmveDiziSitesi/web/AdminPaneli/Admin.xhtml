@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="jakarta.faces.html">
     <h:head>
-        <title>Admin Paneli</title>
+        <title>Admın Panelı</title>
         <h:outputStylesheet  name="/adminpanelicss/reset.css" />
         <h:outputStylesheet  name="/adminpanelicss/admin.css" />
         <script src="https://kit.fontawesome.com/66f2961287.js" crossorigin="anonymous"></script>
@@ -18,15 +18,15 @@
         <h:form id="admin-form">
             <div class="adminGiris">
                 <i class="fa-solid fa-user"></i>
-                <h:inputText id="username" value=" " styleClass="user" > </h:inputText>
+                <h:inputText id="username" value="#{sessionBean.username}" styleClass="user" > </h:inputText>
             </div>
 
             <div class="adminSifre">
                 <i class="fa-solid fa-key"></i>
-                <h:inputSecret id="password" value="Password" styleClass="password"  />
+                <h:inputSecret id="password" value="#{sessionBean.password}" required="true" requiredMessage="Bu alan zorunludur" styleClass="password"  />
             </div>
 
-            <h:commandButton value="Oturum Aç" action="Adminİslemleri.xhtml" styleClass="oturumAç" />
+            <h:commandButton value="Oturum Aç" action="#{sessionBean.login()}" required="true" requiredMessage="Şifre girmelisiniz" styleClass="oturumAç" />
         </h:form>
 
 
