@@ -3,20 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/KullaniciPaneli/Film.xhtml</file>
             <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/dao/FilmveDiziDao.java</file>
-            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/bean/SessionBean.java</file>
-            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/FilmveDiziİslemleri.xhtml</file>
-            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/util/LoginFilter.java</file>
-            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/FilmveDiziEkle.xhtml</file>
-            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/FilmveDiziGüncelle.xhtml</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/bean/KullanıcıBean.java</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/util/KullanıcıFilter.java</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/KullaniciPaneli/AnaSayfa.xhtml</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/resources/kullanicipanelicss/anaSayfa.css</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/KullaniciPaneli/FilmeGirenKısım.xhtml</file>
             <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/util/DBConnection.java</file>
-            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/AdminIslemleri.xhtml</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/entity/Kullanıcı.java</file>
             <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/dao/LoginDAO.java</file>
-            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/Admin.xhtml</file>
-            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/AdminPaneli/FilmveDiziSil.xhtml</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/KullaniciPaneli/girişYap.xhtml</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/dao/MesajlarDAO.java</file>
             <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/bean/FilmveDiziBean.java</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/KullaniciPaneli/Kitaplık.xhtml</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/KullaniciPaneli/İletişim.xhtml</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/KullaniciPaneli/VizyondakiFilmler.xhtml</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/KullaniciPaneli/Dizi.xhtml</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/dao/KullanıcıDAO.java</file>
             <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/entity/FilmveDizi.java</file>
-            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/src/java/entity/Admin.java</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/KullaniciPaneli/uyeOl.xhtml</file>
+            <file>file:/C:/Users/MERVAN/Desktop/Filmoloji/Filmoloji/FilmveDiziSitesi/web/KullaniciPaneli/Trendeki%20Diziler.xhtml</file>
         </group>
     </open-files>
 </project-private>

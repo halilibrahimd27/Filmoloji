@@ -13,8 +13,8 @@ public abstract class DBConnection {
         Connection c = null;
         try {
             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Filmoloji", "postgres", "123456");
-            System.out.println("Başarili");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cms", "postgres", "123456");
+            System.out.println("Basarili");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

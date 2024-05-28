@@ -108,7 +108,7 @@ body{
     justify-content: center;
     align-items: center;
     text-align: center;
-    
+
 }
 
 .header-left-form{
@@ -126,7 +126,7 @@ body{
     background-color: transparent;
     width: auto;
     border:none;
-    cursor: pointer;
+    cursor:pointer;
 }
 .header-right{
     display: flex;
@@ -138,7 +138,13 @@ body{
 
 }
 
- 
+#header-right-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
 .small-button.register {
     color: #adbac7;
     display: flex;
@@ -219,7 +225,7 @@ ol, ul {
 .social-icon {
     padding: 0;
     margin-bottom: 0px;
-        float: right;
+    float: right;
 }
 
 .social-icon li {
@@ -290,7 +296,7 @@ ol, ul {
 }
 
 footer p {
-  margin-bottom:0;
+    margin-bottom:0;
 }
 .footer-logo {
     display: block;
@@ -355,5 +361,5 @@ footer .social-icon li i:hover {
 }
 .copyright {
     font-size: 13px;
-    
+
 }

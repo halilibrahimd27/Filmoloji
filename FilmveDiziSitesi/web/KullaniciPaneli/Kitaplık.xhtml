@@ -20,7 +20,7 @@
         <div class="containerr">
             <header class="header">
                 <div class="header-left">
-                <h:form styleClass="header-left-form">
+                    <h:form styleClass="header-left-form">
                         <h:commandButton action="AnaSayfa.xhtml" styleClass="navbtn" value="AnaSayfa"></h:commandButton>
                         <h:commandButton action="Film.xhtml" styleClass="navbtn" value="Filmler"></h:commandButton>
                         <h:commandButton action="Dizi.xhtml" styleClass="navbtn" value="Diziler"></h:commandButton>
@@ -38,19 +38,27 @@
                     </form>
                 </div>
 
-                <div class="header-right">
-                <h:form id="header-right-form">
-                        <h:commandLink styleClass="small-button register" action="girişKısmı.xhtml">
+                 <div class="header-right">
+                    <h:form rendered="#{validUser==null}" id="header-right-form">
+                        
+                        <h:commandLink styleClass="small-button register" action="uyeOl.xhtml">
                             <i class="fas fa-user-plus"></i>
                             <span class="nomob">Üye Ol</span>
                         </h:commandLink>
 
+                        <h:commandLink  styleClass="small-button register" action="girişYap.xhtml">
+                            <i class="fas fa-user-plus"></i>
+                            <span class="nomob">Üye Girişi</span>
+                        </h:commandLink>
+
                     </h:form>
-                    <button class="btn btn-outline-success my-2 my-sm-0" id="buttons">
-                        <i class="fas fa-sign-in-alt"></i> 
-                        <div class="nomob">Üye Girişi</div> 
-                    </button>
+
+                    <h:form rendered="#{validUser!=null}">
+                        <h:commandButton action="logout" value="logout"/>
+                    </h:form>
+
                 </div>
+
 
             </header>
 
@@ -86,11 +94,11 @@
                                         <span class="box type">Dublaj &amp; Altyazı</span>
                                     </span>
                                 </span>
-                        </h:graphicImage>
+                            </h:graphicImage>
                         </a>
                     </div>				
                 </div>
-                 <div class="move_k">
+                <div class="move_k">
                     <div>
                         <a class="image" href="FilmeGirenKısım.xhtml" title="As They Made Us izle">
                             <h:graphicImage library="images" name="as-they-made-us-2022_f.jpg">
@@ -103,17 +111,17 @@
                                         <span class="box type">Dublaj &amp; Altyazı</span>
                                     </span>
                                 </span>
-                        </h:graphicImage>
+                            </h:graphicImage>
                         </a>
                     </div>				
                 </div>
             </section>
-            
-              <section class="content">
+
+            <section class="content">
                 <h2 class="b_title" title="Yeni Filmler">
                     Dizilerim
                 </h2>
-                 <div class="move_k">
+                <div class="move_k">
                     <div>
                         <a class="image" href="FilmeGirenKısım.xhtml" title="As They Made Us izle">
                             <h:graphicImage library="images" name="as-they-made-us-2022_f.jpg">
@@ -126,11 +134,11 @@
                                         <span class="box type">Dublaj &amp; Altyazı</span>
                                     </span>
                                 </span>
-                        </h:graphicImage>
+                            </h:graphicImage>
                         </a>
                     </div>				
                 </div>
-                   <div class="move_k">
+                <div class="move_k">
                     <div>
                         <a class="image" href="FilmeGirenKısım.xhtml" title="As They Made Us izle">
                             <h:graphicImage library="images" name="as-they-made-us-2022_f.jpg">
@@ -143,7 +151,7 @@
                                         <span class="box type">Dublaj &amp; Altyazı</span>
                                     </span>
                                 </span>
-                        </h:graphicImage>
+                            </h:graphicImage>
                         </a>
                     </div>				
                 </div>
@@ -155,13 +163,13 @@
 
 
     </h:body>
- <footer>
+    <footer>
         <div class="footer-top">
             <div class="container">
-               
+
                 <div class="row">
                     <div class="col-lg-4">
-                        
+
                         <h4>Hakkımızda </h4>
                         <p> FilmolojiFilmolojiFilmolojiFilmolojiFilmoloji  </p>
 
@@ -190,14 +198,14 @@
         </div>
         <div class="footer-bottom">
             <div class="container">
-                
-                    <div class="col-sm-5">
-                       
-                            
-                            <p class="copyright">&copy; Tüm Hakları <strong>Filmoloji'ye</strong> aittir.</p>
-                    </div>
-                    
-                
+
+                <div class="col-sm-5">
+
+
+                    <p class="copyright">&copy; Tüm Hakları <strong>Filmoloji'ye</strong> aittir.</p>
+                </div>
+
+
             </div>
         </div>
     </footer>

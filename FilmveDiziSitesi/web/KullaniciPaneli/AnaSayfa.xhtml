@@ -22,30 +22,33 @@
     </h:head>
     <h:body>
 
+        
         <div class="girişKısmı" id="girisSayfasi">
-
-            <div class="girişKısmı-top"> 
-                <h1>Üye Girişi</h1>
-                <i class="fa-solid fa-xmark" id="exit"></i>
-            </div>
+            <h:form >
+                <div class="girişKısmı-top"> 
+                    <h1>Üye Girişi</h1>
+                    <i class="fa-solid fa-xmark" id="exit"></i>
+                </div>
+            </h:form>
 
             <div class="girişKısmı-bottom">
-                <h:form id="form-ayarları">
+                <h:form  id="form-ayarları">
                     <p>Kullanıcı Adı :</p>
-                    <h:inputText id="username" value="" styleClass="users" >
+                    <h:inputText id="username" value="#{kullanıcıBean.entity.name}" styleClass="users" >
 
                     </h:inputText>
 
                     <p>Password :</p>
-                    <h:inputSecret id="password" value="Password" styleClass="password"  />
+                    <h:inputSecret id="password" value="#{kullanıcıBean.entity.password}" styleClass="password"  />
 
-                    <h:commandButton value="Giriş Yap" action="#" styleClass="buttonss" />
+                    <h:commandButton value="Giriş Yap" action="#{kullanıcıBean.login()}" styleClass="buttonss" />
                 </h:form>
 
             </div>
 
         </div>
 
+        
         <div class="containerr">
             <header class="header">
                 <div class="header-left">
@@ -68,24 +71,29 @@
                 </div>
 
                 <div class="header-right">
-                    <h:form id="header-right-form">
-                        <h:commandLink styleClass="small-button register" action="girişKısmı.xhtml">
+                    <h:form rendered="#{validUser==null}" id="header-right-form">
+                        
+                        <h:commandLink styleClass="small-button register" action="uyeOl.xhtml">
                             <i class="fas fa-user-plus"></i>
                             <span class="nomob">Üye Ol</span>
                         </h:commandLink>
 
+                        <h:commandLink  styleClass="small-button register" action="girişYap.xhtml">
+                            <i class="fas fa-user-plus"></i>
+                            <span class="nomob">Üye Girişi</span>
+                        </h:commandLink>
+
                     </h:form>
-                    <button class="btn btn-outline-success my-2 my-sm-0" id="buttons">
-                        <i class="fas fa-sign-in-alt"></i> 
-                        <div class="nomob">Üye Girişi</div> 
-                    </button>
+
+                    <h:form rendered="#{validUser!=null}">
+                        <h:commandButton action="logout" value="logout"/>
+                    </h:form>
+
                 </div>
 
                 <div class="header-right-Profil">
                     <i class="fa-regular fa-user"></i>
                     <h:outputText value="Semih" styleClass="kullanıcıİsmi" id="a" />
-
-
                 </div>
 
             </header>

@@ -16,7 +16,7 @@
         <div class="containerr">
             <header class="header">
                 <div class="header-left">
-                 <h:form styleClass="header-left-form">
+                    <h:form styleClass="header-left-form">
                         <h:commandButton action="AnaSayfa.xhtml" styleClass="navbtn" value="AnaSayfa"></h:commandButton>
                         <h:commandButton action="Film.xhtml" styleClass="navbtn" value="Filmler"></h:commandButton>
                         <h:commandButton action="Dizi.xhtml" styleClass="navbtn" value="Diziler"></h:commandButton>
@@ -35,18 +35,26 @@
                 </div>
 
                 <div class="header-right">
-                <h:form id="header-right-form">
-                        <h:commandLink styleClass="small-button register" action="girişKısmı.xhtml">
+                    <h:form rendered="#{validUser==null}" id="header-right-form">
+
+                        <h:commandLink styleClass="small-button register" action="uyeOl.xhtml">
                             <i class="fas fa-user-plus"></i>
                             <span class="nomob">Üye Ol</span>
                         </h:commandLink>
 
+                        <h:commandLink  styleClass="small-button register" action="girişYap.xhtml">
+                            <i class="fas fa-user-plus"></i>
+                            <span class="nomob">Üye Girişi</span>
+                        </h:commandLink>
+
                     </h:form>
-                    <button class="btn btn-outline-success my-2 my-sm-0" id="buttons">
-                        <i class="fas fa-sign-in-alt"></i> 
-                        <div class="nomob">Üye Girişi</div> 
-                    </button>
+
+                    <h:form rendered="#{validUser!=null}">
+                        <h:commandButton action="logout" value="logout"/>
+                    </h:form>
+
                 </div>
+
 
             </header>
 
@@ -68,7 +76,7 @@
                 <div class="film-imdb">
                     <div class="imdb-resim">
                         <p>5.0</p>
-                    <h:graphicImage library="images" name="imdb.png"/>
+                        <h:graphicImage library="images" name="imdb.png"/>
 
                     </div>
                     <div class="yıldızKısmı">
@@ -227,7 +235,7 @@
                     <div class="yorumatanKişi">
 
                         <div class="yorumatan-resim">
-                           <h:graphicImage library="images" name="kullanıcı.png"/>
+                            <h:graphicImage library="images" name="kullanıcı.png"/>
                         </div>
 
                         <div class="yorumatan-yazılar">
@@ -264,7 +272,7 @@
                     <div class="yorumatanKişi">
 
                         <div class="yorumatan-resim">
-                         <h:graphicImage library="images" name="kullanıcı.png"/>
+                            <h:graphicImage library="images" name="kullanıcı.png"/>
                         </div>
 
                         <div class="yorumatan-yazılar">

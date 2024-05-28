@@ -15,7 +15,7 @@
         
         <h:form id="kullanıcı-islemleri">
             
-            <h:commandLink value="Geri" action="Kullanıcıİslemleri.xhtml" styleClass="geriButton" />
+            <h:commandLink value="Geri" action="KullaniciIslemleri.xhtml" styleClass="geriButton" />
             
             <div class="kullanıcı-container">
                 <h1>Kullanıcı Adı : </h1>
@@ -27,7 +27,9 @@
                 <h:inputSecret id="password" value="#{kullanıcıBean.entity.sifre}" styleClass="password"  />
             </div>
            
-            <h:commandButton value="Kullanıcı Ekle" action="#{kullanıcıBean.create}" styleClass="kullanıcıEkleButton" />
+            <h:commandButton value="Kullanıcı Ekle" action="#{kullanıcıBean.create}" styleClass="kullanıcıEkleButton">
+                     <f:ajax execute="@this" render="kullanıcı-islemleri"/>
+            </h:commandButton>
             
         </h:form>
 

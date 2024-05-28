@@ -39,18 +39,26 @@
                 </div>
 
                 <div class="header-right">
-                     <h:form id="header-right-form">
-                        <h:commandLink styleClass="small-button register" action="girişKısmı.xhtml">
+                    <h:form rendered="#{validUser==null}" id="header-right-form">
+                        
+                        <h:commandLink styleClass="small-button register" action="uyeOl.xhtml">
                             <i class="fas fa-user-plus"></i>
                             <span class="nomob">Üye Ol</span>
                         </h:commandLink>
 
+                        <h:commandLink  styleClass="small-button register" action="girişYap.xhtml">
+                            <i class="fas fa-user-plus"></i>
+                            <span class="nomob">Üye Girişi</span>
+                        </h:commandLink>
+
                     </h:form>
-                    <button class="btn btn-outline-success my-2 my-sm-0" id="buttons">
-                        <i class="fas fa-sign-in-alt"></i> 
-                        <div class="nomob">Üye Girişi</div> 
-                    </button>
+
+                    <h:form rendered="#{validUser!=null}">
+                        <h:commandButton action="logout" value="logout"/>
+                    </h:form>
+
                 </div>
+
 
             </header>
 

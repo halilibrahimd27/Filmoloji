@@ -10,7 +10,7 @@
     <ui:define name="title">Film ve Dizi Ekle </ui:define>
 
     <ui:define name="geriButtonTemplate">
-        <h:commandLink value="Geri" action="FilmveDiziİslemleri.xhtml" styleClass="geriButton" />
+        <h:commandLink value="Geri" action="FilmveDiziIslemleri.xhtml" styleClass="geriButton" />
     </ui:define>
 
     <ui:define name="eklemeKısımlari">
@@ -60,7 +60,11 @@
                 </h:selectOneMenu>
             </div>
 
-            <h:commandButton value="Ekle" action="#{filmveDiziBean.create}" styleClass="filmEkleButton" />
+            <h:commandButton value="Ekle" action="#{filmveDiziBean.create}" styleClass="filmEkleButton">
+                <f:ajax execute="film-islemleri" render="film-islemleri"/>
+            </h:commandButton>        
+
+
         </h:form>
     </ui:define>
 

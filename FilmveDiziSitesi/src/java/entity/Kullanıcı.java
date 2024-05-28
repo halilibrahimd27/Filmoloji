@@ -6,56 +6,61 @@ package entity;
 
 /**
  *
- * @author MERVAN
+ * @author Halil
  */
 public class Kullanıcı {
-    private int kullanici_id;
-    private int id;
-    private String kullanıcıadı;
-    private String sifre;
+    
+    private Long id;
+    private String name;
+    private String email;;
+    private String password;
 
     public Kullanıcı() {
     }
 
-    public Kullanıcı(int kullanici_id, int id, String kullanıcıadı, String sifre) {
-        this.kullanici_id = kullanici_id;
+    public Kullanıcı(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    public Kullanıcı(Long id, String name, String email, String password) {
         this.id = id;
-        this.kullanıcıadı = kullanıcıadı;
-        this.sifre = sifre;
-    }
-    
-    
-
-    public int getKullanici_id() {
-        return kullanici_id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
-    public void setKullanici_id(int kullanici_id) {
-        this.kullanici_id = kullanici_id;
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getKullanıcıadı() {
-        return kullanıcıadı;
+    public String getName() {
+        return name;
     }
 
-    public void setKullanıcıadı(String kullanıcıadı) {
-        this.kullanıcıadı = kullanıcıadı;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSifre() {
-        return sifre;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSifre(String sifre) {
-        this.sifre = sifre;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
     

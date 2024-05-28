@@ -14,8 +14,8 @@
     <h:body>
 
         <div id="containerr"> 
-            <h:form>
-                <h:commandLink value="Geri" action="Kullanıcıİslemleri.xhtml" styleClass="geriButton" />
+            <h:form id="silll">
+                <h:commandLink value="Geri" action="KullaniciIslemleri.xhtml" styleClass="geriButton" />
                 
                 <h:dataTable value="#{kullanıcıBean.list}" var="film"  styleClass="table table-striped">
                     
@@ -31,8 +31,9 @@
                     
                     <h:column styleClass="font-weight-bold">
                         <f:facet   name="header">İşlem</f:facet>
-                        <h:commandButton styleClass="btn btn-danger button" value="Sil" action="#{kullanıcıBean.delete(film)}"  />
-                        
+                        <h:commandButton styleClass="btn btn-danger button" value="Sil" action="#{kullanıcıBean.delete(film)}">
+                        <f:ajax execute="@this" render="kullanıcı-islemleri"/>
+                        </h:commandButton>
                     </h:column>
                     
                 </h:dataTable>

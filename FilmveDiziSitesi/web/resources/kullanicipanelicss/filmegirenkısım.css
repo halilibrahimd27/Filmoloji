@@ -74,6 +74,14 @@ body{
     justify-content: center;
     gap: 25px;
 }
+
+#header-right-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
 .small-button.register {
     color: #adbac7;
     border-color: transparent;

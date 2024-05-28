@@ -4,65 +4,56 @@
  */
 package dao;
 
-import entity.FilmveDizi;
 import entity.Kullanıcı;
-import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import util.DBConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
- * @author MERVAN
+ * @author Halil
  */
-public class KullanıcıDAO extends DBConnection{
-    
-    public void create(Kullanıcı k) {
+public class KullanıcıDAO extends DBConnection {
 
+    private Connection db;
+
+    public void create(Kullanıcı c) {
         try {
-
+            
             Statement st = (Statement) this.getConnect().createStatement();
-            st.executeUpdate("INSERT INTO kullanıcılar (kullanıcıadı, sifre) VALUES ('"
-                    + k.getKullanıcıadı()+ "','"
-                    + k.getSifre()+ ")");
+            st.executeUpdate("INSERT INTO abc (name, email, password) VALUES ('"
 
+                    + c.getName()+ "','"
+                    + c.getEmail()+ "',"
+                    + c.getPassword()+ ")");
+
+/*          String insertQuery = "INSERT INTO Kullanıcı(name,email, password) VALUES(?,?,?)";
+            PreparedStatement preparedStatement = this.getDb().prepareStatement(insertQuery);
+            
+            preparedStatement.setString(1, c.getName());
+            preparedStatement.setString(2, c.getEmail());
+            preparedStatement.setString(3, c.getPassword());
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+*/ 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-    
-    public List<Kullanıcı> getKullanıcıList(int page, int pageSize) {
 
-        List<Kullanıcı> kullanıcıList = new ArrayList<>();
-
-        int start = ((page - 1) * pageSize);
-        int son = start + 5;
+    public void delete(Kullanıcı c) {
         try {
 
-            Statement st = (Statement) this.getConnect().createStatement();
+            Statement st = this.getDb().createStatement();
 
-            String query = "SELECT * FROM kullanıcılar WHERE id BETWEEN " + start + " AND " + son;
-            ResultSet rs = st.executeQuery(query);
-
-            while (rs.next()) {
-
-                kullanıcıList.add(new Kullanıcı(rs.getInt("kullanıcı_id"), rs.getInt("id"), rs.getString("kullanıcıadı"), rs.getString("sifre")));
-            }
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-        return kullanıcıList;
-    }
-    
-     public void delete(Kullanıcı k) {
-        try {
-
-            Statement st = (Statement) this.getConnect().createStatement();
-
-            String query0 = "UPDATE kullanıcılar SET kullanıcı_id = kullanıcı_id - 1 WHERE id > " + k.getKullanici_id();
-            String query1 = "DELETE from kullanıcılar where id=" + k.getKullanici_id();
+            String query0 = "UPDATE kullanıcılar SET kullanici_id = kullanici_id - 1 WHERE kullanici_id > " + c.getId();
+            String query1 = "delete from kullanıcılar where kullanici_id=" + c.getId();
             st.executeUpdate(query1);
             st.executeUpdate(query0);
 
@@ -71,8 +62,32 @@ public class KullanıcıDAO extends DBConnection{
         }
 
     }
-     
-      public int count() {
+
+    public List<Kullanıcı> getKullanıcıList(int page, int pageSize) {
+
+        List<Kullanıcı> kullanıcıList = new ArrayList<>();
+
+        int start = ((page - 1) * pageSize);
+        int son = start + 5;
+        try {
+
+            Statement st = (Statement) this.getDb().createStatement();
+
+            String query = "SELECT * FROM kullanıcılar WHERE kullanici_id BETWEEN " + start + " AND " + son;
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+
+                kullanıcıList.add(new Kullanıcı(rs.getLong("id"), rs.getString("name"), rs.getString("email"), rs.getString("password")));
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return kullanıcıList;
+    }
+
+    public int count() {
 
         int count = 0;
 
@@ -80,17 +95,27 @@ public class KullanıcıDAO extends DBConnection{
 
         try {
 
-            Statement st = (Statement) this.getConnect().createStatement();
+            Statement st = this.getDb().createStatement();
 
-            String query = "select count(kullanıcı_id) as kullanıcılar_count from kullanıcılar";
+            String query = "select count(kullanici_id) as film_count from kullanıcılar";
             ResultSet rs = st.executeQuery(query);
             rs.next();
-            count = rs.getInt("kullanıcılar_count");
+            count = rs.getInt("film_count");
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
         return count;
     }
-    
+
+    public Connection getDb() {
+        if (this.db == null) {
+            this.db = this.getConnect();
+        }
+        return db;
+    }
+
+    public void setDb(Connection db) {
+        this.db = db;
+    }
 }

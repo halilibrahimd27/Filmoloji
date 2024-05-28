@@ -12,21 +12,23 @@
 
 
     <ui:define name="SilmeTablosu">
-        <h:form>
+        <h:form id="mesajj-sil">
             <h:dataTable value=" " var="film"  styleClass="table table-striped">
                 <h:column  styleClass="font-weight-bold">
                     <f:facet   name="header">Kullanıcı Adı</f:facet>
-                    Semih
+                    
                 </h:column>
 
                 <h:column styleClass="font-weight-bold">
                     <f:facet   name="header">Mesajı</f:facet>
-                    1234
+                   
                 </h:column>
 
                 <h:column styleClass="font-weight-bold">
                     <f:facet   name="header">İşlem</f:facet>
-                    <h:commandButton styleClass="btn btn-danger button" value="Sil" action="#"  />
+                    <h:commandButton styleClass="btn btn-danger button" value="Sil" action="">
+                      <f:ajax execute="mesajj-sil" render="mesajj-sil"/>
+                    </h:commandButton>
                 </h:column>
                 
             </h:dataTable>

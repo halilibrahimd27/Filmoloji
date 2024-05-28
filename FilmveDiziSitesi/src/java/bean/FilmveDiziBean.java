@@ -26,12 +26,14 @@ public class FilmveDiziBean  implements Serializable {
     private FilmveDiziDao dao;
     private List<FilmveDizi> list;
     
-     public FilmveDiziBean() {
-    }
     
-      private int page = 1;
+    
+    private int page = 1;
     private int pageSize = 5;
     private int pageCount;
+    
+     public FilmveDiziBean() {
+    }
 
     public void next() {
         if(this.page == this.pageCount) {
