@@ -14,7 +14,7 @@
     </ui:define>
 
     <ui:define name="eklemeKısımlari">
-        <h:form id="film-islemleri">
+        <h:form id="film-islemleri" enctype="multipart/form-data">
             <div class="film-container">
                 <h1>Türü : </h1>
                 <h:selectOneMenu styleClass="browserss" value="#{filmveDiziBean.entity.tur}">
@@ -47,12 +47,24 @@
                 <h1> Oyuncular : </h1>
                 <h:inputTextarea styleClass="filmEkleme konu"  value="#{filmveDiziBean.entity.oyuncular}" rows="5" cols="30" />
             </div>
-
-            <!--            <div class="film-container">
-                            <h1>Film Fragmanı : </h1>
-                            <input type="file" name="dosya" accept="video/*" class="filmEkleme fragmani" />
-                        </div>-->
-
+            
+            
+            
+                <div>
+                    <label>File</label>
+                    <h:inputFile value="#{filmveDiziBean.doc}" styleClass="film-container" />
+                </div>
+                <h:commandButton value="Upload" action="#{filmveDiziBean.upload()}" />
+                
+            
+            
+            
+<!--comment 
+            <div class="film-container">
+                <h1>Film Foto : </h1>
+                <input type="file" name="dosya" accept="video/*" class="filmEkleme fragmani" />
+            </div>
+-->
             <div class="film-container">
                 <h1>Vizyonda ya da TrenddeMi : </h1>
                 <h:selectOneMenu styleClass="browsers" value="#{filmveDiziBean.entity.seçilenVizyonTrends}">

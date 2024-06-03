@@ -25,6 +25,8 @@ import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
+import jakarta.resource.cci.Connection;
+import jakarta.resource.cci.ResultSet;
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -42,7 +44,7 @@ public class KullanıcıBean implements Serializable {
     String link;
     
     public String login() {
-        if (entity.getName().equals("deneme") && entity.getPassword().equals("123")) {
+        if (getDao().isValidUser(entity.getName(),entity.getPassword())) {
             FacesContext fc = FacesContext.getCurrentInstance();
             fc.getExternalContext().getSessionMap().put("validUser", this.entity);
             try {
@@ -62,9 +64,12 @@ public class KullanıcıBean implements Serializable {
         }
 
     }
+    
+    
 
     public void logout() {
-
+        FacesContext fc = FacesContext.getCurrentInstance();
+        fc.getExternalContext().getSessionMap().put("validUser", null);
     }
 
     public KullanıcıBean() {

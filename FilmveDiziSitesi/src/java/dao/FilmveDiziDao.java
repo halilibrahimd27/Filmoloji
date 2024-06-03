@@ -5,8 +5,10 @@
 package dao;
 
 import entity.FilmveDizi;
+import jakarta.resource.cci.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,35 @@ import util.DBConnection;
  * @author semih
  */
 public class FilmveDiziDao extends DBConnection {
+    
+    private Connection connection;
+    
+    
+    public List<FilmveDizi> findAll(){
+        List<FilmveDizi> fdList = new ArrayList<>();
+        
+        try{
+            PreparedStatement pst = this.getConnect().prepareStatement("select * from filmdizi ");
+            ResultSet rs=pst.executeQuery();
+            while(rs.next()){
+                FilmveDizi d =new FilmveDizi();
+                d.setId(rs.getInt("id"));
+                d.setFilePath("path");
+                d.setFileName("name");
+                d.setFileType("type");
+                
+                
+                        
+                fdList.add(d);
+            }
+            
+        
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        
+        return fdList;
+    }
 
     public void create(FilmveDizi fd) {
 
@@ -117,5 +148,17 @@ public class FilmveDiziDao extends DBConnection {
         }
         return count;
     }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
+   
+    
+    
 
 }

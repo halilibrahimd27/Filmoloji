@@ -18,17 +18,24 @@
             <h:commandLink value="Geri" action="KullaniciIslemleri.xhtml" styleClass="geriButton" />
             
             <div class="kullanıcı-container">
+                <h1>Email : </h1>
+                <h:inputText  value="#{kullanıcıBean.entity.email}" styleClass="user" ></h:inputText>
+            </div>
+            
+            <div class="kullanıcı-container">
                 <h1>Kullanıcı Adı : </h1>
-                <h:inputText  value="#{kullanıcıBean.entity.kullanıcıadı}" styleClass="user" ></h:inputText>
+                <h:inputText  value="#{kullanıcıBean.entity.name}" styleClass="user" ></h:inputText>
             </div>
             
             <div class="kullanıcı-container">
                 <h1>Şifre : </h1>
-                <h:inputSecret id="password" value="#{kullanıcıBean.entity.sifre}" styleClass="password"  />
+                <h:inputSecret id="password" value="#{kullanıcıBean.entity.password}" styleClass="password"  />
             </div>
+            
+            
            
-            <h:commandButton value="Kullanıcı Ekle" action="#{kullanıcıBean.create}" styleClass="kullanıcıEkleButton">
-                     <f:ajax execute="@this" render="kullanıcı-islemleri"/>
+            <h:commandButton value="Kullanıcı Ekle" action="#{kullanıcıBean.create()}" styleClass="kullanıcıEkleButton">
+                     
             </h:commandButton>
             
         </h:form>

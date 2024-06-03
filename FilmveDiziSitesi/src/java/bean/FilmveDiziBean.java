@@ -10,7 +10,11 @@ import jakarta.inject.Named;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.event.ValueChangeEvent;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -26,8 +30,35 @@ public class FilmveDiziBean  implements Serializable {
     private FilmveDiziDao dao;
     private List<FilmveDizi> list;
     
+    private Part doc;
     
+    private final String uploadTo="C:\\Users\\MERVAN\\upload\\";
     
+    public void upload(){
+        try{
+            InputStream input=doc.getInputStream();
+            File f= new File(uploadTo+doc.getSubmittedFileName());
+            Files.copy(input, f.toPath());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+    
+    }
+
+    public String getUploadTo() {
+        return uploadTo;
+    }
+
+    public Part getDoc() {
+        return doc;
+    }
+
+    public void setDoc(Part doc) {
+        this.doc = doc;
+    }
+    
+  
     private int page = 1;
     private int pageSize = 5;
     private int pageCount;

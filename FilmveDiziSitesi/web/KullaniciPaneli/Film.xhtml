@@ -54,7 +54,14 @@
                     </h:form>
 
                     <h:form rendered="#{validUser!=null}">
-                        <h:commandButton action="logout" value="logout"/>
+                        <div class="header-right-Profil">
+                            <i class="fa-regular fa-user"></i>
+                            <h:outputText value="#{kullanıcıBean.entity.name}" styleClass="kullanıcıİsmi" id="a" />
+                        </div>
+                    </h:form>
+
+                    <h:form rendered="#{validUser!=null}">
+                        <h:commandButton action="#{kullanıcıBean.logout()}" value="logout"/>
                     </h:form>
 
                 </div>

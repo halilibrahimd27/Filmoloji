@@ -22,5 +22,6 @@ public class NavigationBean implements Serializable {
       public void navigateTo(String page) throws IOException {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         externalContext.redirect(page + ".xhtml");
+        
     }
 }

@@ -22,26 +22,67 @@ public class KullanıcıDAO extends DBConnection {
 
     private Connection db;
 
+    public boolean isValidUser(String name, String password) {
+        boolean isValid = false;
+        jakarta.resource.cci.Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            // Veritabanı bağlantısı
+
+            // SQL sorgusu
+            String sql = "SELECT COUNT(*) FROM kullanıcılar WHERE name = ? AND password = ?";
+            statement = getDb().prepareStatement(sql);
+            statement.setString(1, name);
+            statement.setString(2, password);
+
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                isValid = resultSet.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return isValid;
+    }
+
+    /*
     public void create(Kullanıcı c) {
         try {
             
-            Statement st = (Statement) this.getConnect().createStatement();
-            st.executeUpdate("INSERT INTO abc (name, email, password) VALUES ('"
+//            Statement st = (Statement) this.getConnect().createStatement();
+//            st.executeUpdate("INSERT INTO abc (name, email, password) VALUES ('"
+//
+//                    + c.getName()+ "','"
+//                    + c.getEmail()+ "',"
+//                    + c.getPassword()+ ")");
 
-                    + c.getName()+ "','"
-                    + c.getEmail()+ "',"
-                    + c.getPassword()+ ")");
+      String insertQuery = "INSERT INTO kullanıcılar(email,name, password) VALUES(?,?,?)";
+            try (PreparedStatement preparedStatement = this.getDb().prepareStatement(insertQuery)) {
+                preparedStatement.setString(1, c.getEmail());
+                preparedStatement.setString(2, c.getName());
+                preparedStatement.setString(3, c.getPassword());
+                
+                preparedStatement.executeUpdate();
+            }
+ 
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+     */
+    public void create(Kullanıcı k) {
 
-/*          String insertQuery = "INSERT INTO Kullanıcı(name,email, password) VALUES(?,?,?)";
-            PreparedStatement preparedStatement = this.getDb().prepareStatement(insertQuery);
-            
-            preparedStatement.setString(1, c.getName());
-            preparedStatement.setString(2, c.getEmail());
-            preparedStatement.setString(3, c.getPassword());
+        String sql = "INSERT INTO kullanıcılar (email, name, password) VALUES (?, ?, ?)";
 
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-*/ 
+        try (Connection conn = this.getConnect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, k.getEmail());
+            pstmt.setString(2, k.getName());
+            pstmt.setString(3, k.getPassword());
+            pstmt.executeUpdate();
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -78,7 +119,7 @@ public class KullanıcıDAO extends DBConnection {
 
             while (rs.next()) {
 
-                kullanıcıList.add(new Kullanıcı(rs.getLong("id"), rs.getString("name"), rs.getString("email"), rs.getString("password")));
+                kullanıcıList.add(new Kullanıcı(rs.getLong("kullanici_id"), rs.getString("email"), rs.getString("name"), rs.getString("password")));
             }
 
         } catch (SQLException ex) {
@@ -97,10 +138,10 @@ public class KullanıcıDAO extends DBConnection {
 
             Statement st = this.getDb().createStatement();
 
-            String query = "select count(kullanici_id) as film_count from kullanıcılar";
+            String query = "select count(kullanici_id) as kullanıcı_count from kullanıcılar";
             ResultSet rs = st.executeQuery(query);
             rs.next();
-            count = rs.getInt("film_count");
+            count = rs.getInt("kullanıcı_count");
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

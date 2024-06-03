@@ -18,13 +18,13 @@
         <h:form id="admin-form">
             <div class="adminGiris">
                 <i class="fa-solid fa-user"></i>
-                <h:inputText id="username" value="#{sessionBean.username2}" required="true" requiredMessage="Bu alan zorunludur" styleClass="user" > </h:inputText>
+                <h:inputText id="username" value="#{sessionBean.entity.username}" required="true" requiredMessage="Bu alan zorunludur" styleClass="user" > </h:inputText>
                 <h:message for="username" style="color: red;font-size: 10pt;" /><br/>
             </div>
 
             <div class="adminSifre">
                 <i class="fa-solid fa-key"></i>
-                <h:inputSecret id="password" value="#{sessionBean.password2}" required="true" requiredMessage="Şifre girmelisiniz" styleClass="password"  />
+                <h:inputSecret id="password" value="#{sessionBean.entity.password}" required="true" requiredMessage="Şifre girmelisiniz" styleClass="password"  />
                 <h:message for="password" style="color: red;font-size: 10pt;"/>
             </div>
 

@@ -22,7 +22,7 @@
     </h:head>
     <h:body>
 
-        
+
         <div class="girişKısmı" id="girisSayfasi">
             <h:form >
                 <div class="girişKısmı-top"> 
@@ -48,7 +48,7 @@
 
         </div>
 
-        
+
         <div class="containerr">
             <header class="header">
                 <div class="header-left">
@@ -72,7 +72,7 @@
 
                 <div class="header-right">
                     <h:form rendered="#{validUser==null}" id="header-right-form">
-                        
+
                         <h:commandLink styleClass="small-button register" action="uyeOl.xhtml">
                             <i class="fas fa-user-plus"></i>
                             <span class="nomob">Üye Ol</span>
@@ -85,16 +85,22 @@
 
                     </h:form>
 
-                    <h:form rendered="#{validUser!=null}">
-                        <h:commandButton action="logout" value="logout"/>
-                    </h:form>
+
 
                 </div>
 
-                <div class="header-right-Profil">
-                    <i class="fa-regular fa-user"></i>
-                    <h:outputText value="Semih" styleClass="kullanıcıİsmi" id="a" />
-                </div>
+                <h:form rendered="#{validUser!=null}">
+                    <div class="header-right-Profil">
+                        <i class="fa-regular fa-user"></i>
+                        <h:outputText value="#{kullanıcıBean.entity.name}" styleClass="kullanıcıİsmi" id="a" />
+                    </div>
+                </h:form>
+                
+                
+
+                <h:form rendered="#{validUser!=null}">
+                    <h:commandButton action="#{kullanıcıBean.logout()}" value="logout" styleClass="buttonsss"/>
+                </h:form>
 
             </header>
 

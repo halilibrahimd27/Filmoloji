@@ -17,16 +17,21 @@
             <h:form id="silll">
                 <h:commandLink value="Geri" action="KullaniciIslemleri.xhtml" styleClass="geriButton" />
                 
-                <h:dataTable value="#{kullanıcıBean.list}" var="film"  styleClass="table table-striped">
+                <h:dataTable value="#{kullanıcıBean.list}" var="kullanıcı"  styleClass="table table-striped">
+                    
+                    <h:column  styleClass="font-weight-bold">
+                        <f:facet   name="header">Email</f:facet>
+                        #{kullanıcı.email}
+                    </h:column>
                     
                     <h:column  styleClass="font-weight-bold">
                         <f:facet   name="header">Kullanıcı Adı</f:facet>
-                        #{film.kullanıcıadı}
+                        #{kullanıcı.name}
                     </h:column>
                     
                     <h:column styleClass="font-weight-bold">
                         <f:facet   name="header">Şifre</f:facet>
-                        #{film.sifre}
+                        #{kullanıcı.password}
                     </h:column>
                     
                     <h:column styleClass="font-weight-bold">
