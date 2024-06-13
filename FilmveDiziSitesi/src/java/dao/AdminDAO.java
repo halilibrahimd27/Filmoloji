@@ -22,6 +22,7 @@ import util.DBConnection;
  */
 public class AdminDAO extends DBConnection{
     
+    
     public boolean isValidUser(String username,String password){
         boolean isValid = false;
         jakarta.resource.cci.Connection connection = null;
@@ -79,6 +80,9 @@ public class AdminDAO extends DBConnection{
                     + a.getUsername()+ "','"
                     + a.getEmail()+ "','"
                     + a.getPassword()+ ")");
+            
+            ResultSet rs =st.getGeneratedKeys();
+            
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

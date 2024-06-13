@@ -43,10 +43,13 @@ public class KullanıcıBean implements Serializable {
     private List<Kullanıcı> list;
     String link;
     
+    
+    
+
     public String login() {
-        if (getDao().isValidUser(entity.getName(),entity.getPassword())) {
+        if (getDao().isValidUser(entity.getName(), entity.getPassword())) {
             FacesContext fc = FacesContext.getCurrentInstance();
-            fc.getExternalContext().getSessionMap().put("validUser", this.entity);
+            fc.getExternalContext().getSessionMap().put("validUser", entity);
             try {
                 ExternalContext externalContext = fc.getExternalContext();
                 externalContext.redirect("AnaSayfa.xhtml");
@@ -64,8 +67,6 @@ public class KullanıcıBean implements Serializable {
         }
 
     }
-    
-    
 
     public void logout() {
         FacesContext fc = FacesContext.getCurrentInstance();
@@ -75,12 +76,12 @@ public class KullanıcıBean implements Serializable {
     public KullanıcıBean() {
     }
 
-    private int page = 1;
-    private int pageSize = 5;
+    private int page=1;
+    private int pageSize=5;
     private int pageCount;
 
     public void next() {
-        if (this.page == this.pageCount) {
+        if (this.page == this.getPageCount()) {
             this.page = 1;
         } else {
             this.page++;
@@ -90,7 +91,7 @@ public class KullanıcıBean implements Serializable {
 
     public void prev() {
         if (this.page == 1) {
-            this.page = this.pageCount;
+            this.page = this.getPageCount();
         } else {
             this.page--;
         }
@@ -138,8 +139,8 @@ public class KullanıcıBean implements Serializable {
     }
 
     public Kullanıcı getEntity() {
-        if (this.entity == null) {
-            this.entity = new Kullanıcı();
+        if (entity == null) {
+            entity = new Kullanıcı();
         }
         return entity;
     }
@@ -160,7 +161,7 @@ public class KullanıcıBean implements Serializable {
     }
 
     public List<Kullanıcı> getList() {
-        this.list = this.getDao().getKullanıcıList(page, pageSize);
+        this.list = this.getDao().getKullanıcıList();
         return list;
     }
 

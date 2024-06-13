@@ -4,6 +4,7 @@
  */
 package dao;
 
+import entity.FilmveDizi;
 import entity.Kullanıcı;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class KullanıcıDAO extends DBConnection {
             // Veritabanı bağlantısı
 
             // SQL sorgusu
-            String sql = "SELECT COUNT(*) FROM kullanıcılar WHERE name = ? AND password = ?";
+            String sql = "SELECT COUNT(*) FROM kullanıcılar WHERE kullanıcıadı = ? AND password = ?";
             statement = getDb().prepareStatement(sql);
             statement.setString(1, name);
             statement.setString(2, password);
@@ -74,7 +75,7 @@ public class KullanıcıDAO extends DBConnection {
      */
     public void create(Kullanıcı k) {
 
-        String sql = "INSERT INTO kullanıcılar (email, name, password) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO kullanıcılar (email, kullanıcıAdı, password) VALUES (?, ?, ?)";
 
         try (Connection conn = this.getConnect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -94,7 +95,7 @@ public class KullanıcıDAO extends DBConnection {
             Statement st = this.getDb().createStatement();
 
             String query0 = "UPDATE kullanıcılar SET kullanici_id = kullanici_id - 1 WHERE kullanici_id > " + c.getId();
-            String query1 = "delete from kullanıcılar where kullanici_id=" + c.getId();
+            String query1 = "DELETE from kullanıcılar where kullanici_id=" + c.getId();
             st.executeUpdate(query1);
             st.executeUpdate(query0);
 
@@ -104,22 +105,21 @@ public class KullanıcıDAO extends DBConnection {
 
     }
 
-    public List<Kullanıcı> getKullanıcıList(int page, int pageSize) {
+    public List<Kullanıcı> getKullanıcıList() {
 
         List<Kullanıcı> kullanıcıList = new ArrayList<>();
 
-        int start = ((page - 1) * pageSize);
-        int son = start + 5;
+        
         try {
 
             Statement st = (Statement) this.getDb().createStatement();
 
-            String query = "SELECT * FROM kullanıcılar WHERE kullanici_id BETWEEN " + start + " AND " + son;
+            String query = "SELECT * FROM kullanıcılar ";
             ResultSet rs = st.executeQuery(query);
 
             while (rs.next()) {
 
-                kullanıcıList.add(new Kullanıcı(rs.getLong("kullanici_id"), rs.getString("email"), rs.getString("name"), rs.getString("password")));
+                kullanıcıList.add(new Kullanıcı(rs.getLong("kullanici_id"), rs.getString("kullanıcıadı"), rs.getString("email"), rs.getString("password")));
             }
 
         } catch (SQLException ex) {
@@ -128,20 +128,42 @@ public class KullanıcıDAO extends DBConnection {
         return kullanıcıList;
     }
 
+    public List<Kullanıcı> findAll(int page, int pageSize) {
+        List<Kullanıcı> kullanıcıList = new ArrayList<>();
+
+        int start = (page - 1) * (pageSize);
+
+        try {
+            PreparedStatement pst = this.getConnect().prepareStatement("select * from kullanıcılar order by kullanici_id asc limit " + start + "," + pageSize);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Kullanıcı k = new Kullanıcı();
+                k.setId(rs.getLong("kullanici_id"));
+                k.setEmail(rs.getString("email"));
+                k.setName(rs.getString("kullanıcıAdı"));
+                k.setPassword(rs.getString("password"));
+
+                kullanıcıList.add(k);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return kullanıcıList;
+    }
+
     public int count() {
 
         int count = 0;
 
-        List<Kullanıcı> kullanıcıList = new ArrayList<>();
-
         try {
 
-            Statement st = this.getDb().createStatement();
-
-            String query = "select count(kullanici_id) as kullanıcı_count from kullanıcılar";
-            ResultSet rs = st.executeQuery(query);
+            //Statement st = this.getConnect().createStatement();
+            PreparedStatement pst = this.getDb().prepareStatement("select count(kullanici_id) as kullanıcılar_count from kullanıcılar");
+            ResultSet rs = pst.executeQuery();
             rs.next();
-            count = rs.getInt("kullanıcı_count");
+            count = rs.getInt("kullanıcılar_count");
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

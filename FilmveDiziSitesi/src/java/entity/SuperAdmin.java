@@ -13,6 +13,8 @@ public class SuperAdmin {
     private String username;
     private String email;
     private String password;
+    
+    private Admin admin;
 
     public SuperAdmin(int id, String username, String email, String password) {
         this.id = id;

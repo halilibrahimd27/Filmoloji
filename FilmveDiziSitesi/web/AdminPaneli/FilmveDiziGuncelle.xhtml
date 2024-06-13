@@ -10,11 +10,11 @@
     <ui:define name="title">Film veya Diziyi Güncelle </ui:define>
 
     <ui:define name="geriButtonTemplate">
-        <h:commandLink value="Geri" action="FilmveDiziIslemleri.xhtml" styleClass="geriButton" />
+        <h:commandLink value="Geri" action="FilmveDiziİslemleri.xhtml" styleClass="geriButton" />
     </ui:define>
 
     <ui:define name="eklemeKısımlari">
-        <h:form id="film-islemleri">
+        <h:form id="film-islemleri" enctype="multipart/form-data">
             <div class="film-container">
                 <h1>Türü : </h1>
                 <h:selectOneMenu styleClass="browserss" value="#{filmveDiziBean.entity.tur}">
@@ -47,11 +47,21 @@
                 <h1> Oyuncular : </h1>
                 <h:inputTextarea styleClass="filmEkleme konu"  value="#{filmveDiziBean.entity.oyuncular}" rows="5" cols="30" />
             </div>
-
-            <!--            <div class="film-container">
-                            <h1>Film Fragmanı : </h1>
-                            <input type="file" name="dosya" accept="video/*" class="filmEkleme fragmani" />
-                        </div>-->
+            
+               <div class="film-container">
+                <h1> Platform : </h1>
+                <h:inputText  value="#{filmveDiziBean.entity.platform.platform_adi}" styleClass="filmEkleme adi" ></h:inputText>
+            </div>
+            
+               <div class="film-container">
+                <h1> Imdb : </h1>
+                <h:inputText  value="#{filmveDiziBean.entity.imdb.imdb}" styleClass="filmEkleme adi" ></h:inputText>
+            </div>
+            
+             <div class="film-container">
+                <h1> Film'in Fotoğrafi : </h1>
+                <h:inputFile value="#{filmveDiziBean.doc}" name="file"/>
+            </div>
 
             <div class="film-container">
                 <h1>Vizyonda ya da TrenddeMi : </h1>
@@ -60,9 +70,7 @@
                 </h:selectOneMenu>
             </div>
 
-            <h:commandButton value="Güncelle" action="#{filmveDiziBean.update}" styleClass="filmEkleButton">
-            
-            </h:commandButton>
+            <h:commandButton value="Ekle" action="#{filmveDiziBean.update}" styleClass="filmEkleButton" />
         </h:form>
     </ui:define>
 

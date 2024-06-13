@@ -16,12 +16,12 @@
         <div class="containerr">
             <header class="header">
                 <div class="header-left">
-                    <h:form styleClass="header-left-form">
+                 <h:form styleClass="header-left-form">
                         <h:commandButton action="AnaSayfa.xhtml" styleClass="navbtn" value="AnaSayfa"></h:commandButton>
                         <h:commandButton action="Film.xhtml" styleClass="navbtn" value="Filmler"></h:commandButton>
                         <h:commandButton action="Dizi.xhtml" styleClass="navbtn" value="Diziler"></h:commandButton>
                         <h:commandButton action="VizyondakiFilmler.xhtml" styleClass="navbtn" value="Vizyondaki Filmler"></h:commandButton>
-                        <h:commandButton action="Trendeki Diziler.xhtml" styleClass="navbtn" value="Trenddeki Diziler"></h:commandButton>
+                        <h:commandButton action="TrenddekiDiziler.xhtml" styleClass="navbtn" value="Trenddeki Diziler"></h:commandButton>
                         <h:commandButton action="Kitaplık.xhtml" styleClass="navbtn" value="Kitaplığım"></h:commandButton>
                         <h:commandButton action="İletişim.xhtml" styleClass="navbtn" value="İletişim"></h:commandButton>
                     </h:form>
@@ -35,39 +35,24 @@
                 </div>
 
                 <div class="header-right">
-                    <h:form rendered="#{validUser==null}" id="header-right-form">
-
-                        <h:commandLink styleClass="small-button register" action="uyeOl.xhtml">
+                <h:form id="header-right-form">
+                        <h:commandLink styleClass="small-button register" action="girişKısmı.xhtml">
                             <i class="fas fa-user-plus"></i>
                             <span class="nomob">Üye Ol</span>
                         </h:commandLink>
 
-                        <h:commandLink  styleClass="small-button register" action="girişYap.xhtml">
-                            <i class="fas fa-user-plus"></i>
-                            <span class="nomob">Üye Girişi</span>
-                        </h:commandLink>
-
                     </h:form>
-
-                    <h:form rendered="#{validUser!=null}">
-                        <div class="header-right-Profil">
-                            <i class="fa-regular fa-user"></i>
-                            <h:outputText value="#{kullanıcıBean.entity.name}" styleClass="kullanıcıİsmi" id="a" />
-                        </div>
-                    </h:form>
-
-                    <h:form rendered="#{validUser!=null}">
-                        <h:commandButton action="#{kullanıcıBean.logout()}" value="logout"/>
-                    </h:form>
-
+                    <button class="btn btn-outline-success my-2 my-sm-0" id="buttons">
+                        <i class="fas fa-sign-in-alt"></i> 
+                        <div class="nomob">Üye Girişi</div> 
+                    </button>
                 </div>
-
 
             </header>
 
             <section class="film-kısımları"> 
 
-                <div class="video">
+<!--                <div class="video">
                     <div class="video-yazı">
                         <h1>Fragman</h1>
                     </div>
@@ -83,7 +68,7 @@
                 <div class="film-imdb">
                     <div class="imdb-resim">
                         <p>5.0</p>
-                        <h:graphicImage library="images" name="imdb.png"/>
+                    <h:graphicImage library="images" name="imdb.png"/>
 
                     </div>
                     <div class="yıldızKısmı">
@@ -164,7 +149,7 @@
                     </div>
 
 
-                </div>
+                </div>-->
 
                 <div class="film-bilgiler">
                     <div class="film-yazı">
@@ -175,42 +160,43 @@
                     <div class="film-fotografı-yazısı">
 
                         <div class="film-fotograf">
-                            <h:graphicImage library="images" name="as-they-made-us-2022_f.jpg"/>
-                            <h:form styleClass="formelementkitaplık">
-                                <h:commandButton value="Kitaplığa  Ekle"  styleClass="kitaplik" />
-                            </h:form>
+                            <h:graphicImage library="images" value="/file/#{trenddekiDizilerBean.filmeGirenlist.document.fileName}"/>
+                            
                         </div>
 
                         <div class="fim-yazısı">
 
                             <div class="film-baslik ortaklar">
                                 <p>Film Adı :</p>
-                                <p>Recep ivedik</p>
+                                <p>#{trenddekiDizilerBean.filmeGirenlist.adi}</p>
                             </div>
 
                             <div class="film-konu ortaklar">
                                 <p id="filmkonu">Film Konusu :</p>
-                                <p id="lorems">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                <p id="lorems">#{trenddekiDizilerBean.filmeGirenlist.konusu}</p>
                             </div>
 
                             <div class="film-türü ortaklar">
                                 <p>Film Türü :</p>
-                                <p>Dram,Komedi,Romantik</p>
-                            </div>
-
-                            <div class="film-kategori ortaklar">
-                                <p>Film Kategori :</p>
-                                <p>Yerli Filmler</p>
+                                <p>#{trenddekiDizilerBean.filmeGirenlist.tur}</p>
                             </div>
 
                             <div class="film-yönetmen ortaklar">
                                 <p>Yönetmen :</p>
-                                <p>Mayim Bialik</p>
+                                <p>#{trenddekiDizilerBean.filmeGirenlist.yonetmen_adi}</p>
                             </div>
 
                             <div class="film-oyuncular ortaklar">
                                 <p>Oyuncular :</p>
-                                <p>Dianna Agron, Simon Helberg, Candice Bergen, Dustin Hoffman, Justin Chu Cary, Charlie Weber, Julian Gant, Gina Jun, Sweta Keswani, Mellanie Hubert</p>
+                                <p>#{trenddekiDizilerBean.filmeGirenlist.oyuncular}</p>
+                            </div>
+                             <div class="film-oyuncular ortaklar">
+                                <p>İmdb :</p>
+                                <p>#{trenddekiDizilerBean.filmeGirenlist.imdb.imdb}</p>
+                            </div>
+                             <div class="film-oyuncular ortaklar">
+                                <p>Platform :</p>
+                                <p>#{trenddekiDizilerBean.filmeGirenlist.platform.platform_adi}</p>
                             </div>
 
                         </div>
@@ -242,7 +228,7 @@
                     <div class="yorumatanKişi">
 
                         <div class="yorumatan-resim">
-                            <h:graphicImage library="images" name="kullanıcı.png"/>
+                           <h:graphicImage library="images" name="kullanıcı.png"/>
                         </div>
 
                         <div class="yorumatan-yazılar">
@@ -279,7 +265,7 @@
                     <div class="yorumatanKişi">
 
                         <div class="yorumatan-resim">
-                            <h:graphicImage library="images" name="kullanıcı.png"/>
+                         <h:graphicImage library="images" name="kullanıcı.png"/>
                         </div>
 
                         <div class="yorumatan-yazılar">

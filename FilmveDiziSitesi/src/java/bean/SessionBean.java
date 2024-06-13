@@ -36,6 +36,7 @@ public class SessionBean implements Serializable{
     private String username2;
     private  String password2;
     
+    private Kullanıcı kullanıcı;
     private Admin entity;
     private AdminDAO ldao;
     private List<Admin> list;
@@ -88,13 +89,13 @@ public class SessionBean implements Serializable{
 
     }
     
-     public void create(){
+    public void create(){
         this.getLdao().create(entity);
         this.entity=new Admin();
     }
     
     
-      public void update() throws SQLException  {
+    public void update() throws SQLException  {
         this.getLdao().update(entity);
         entity=new Admin();
     }
@@ -103,6 +104,19 @@ public class SessionBean implements Serializable{
         this.getLdao().delete(a);
     }
 
+    public Kullanıcı getKullanıcı() {
+        if(kullanıcı==null){
+        kullanıcı = new Kullanıcı();
+        }
+        return kullanıcı;
+    }
+
+    public void setKullanıcı(Kullanıcı kullanıcı) {
+        this.kullanıcı = kullanıcı;
+    }
+
+    
+    
     
     public String getUsername2() {
         return username2;

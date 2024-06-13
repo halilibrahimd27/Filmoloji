@@ -7,10 +7,10 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="/Templates/EklemeTemplate.xhtml">
 
-    <ui:define name="title">Film ve Dizi Ekle </ui:define>
+    <ui:define name="title">Film ve Dizi Eklee </ui:define>
 
     <ui:define name="geriButtonTemplate">
-        <h:commandLink value="Geri" action="FilmveDiziIslemleri.xhtml" styleClass="geriButton" />
+        <h:commandLink value="Geri" action="FilmveDiziİslemleri.xhtml" styleClass="geriButton" />
     </ui:define>
 
     <ui:define name="eklemeKısımlari">
@@ -48,23 +48,21 @@
                 <h:inputTextarea styleClass="filmEkleme konu"  value="#{filmveDiziBean.entity.oyuncular}" rows="5" cols="30" />
             </div>
             
-            
-            
-                <div>
-                    <label>File</label>
-                    <h:inputFile value="#{filmveDiziBean.doc}" styleClass="film-container" />
-                </div>
-                <h:commandButton value="Upload" action="#{filmveDiziBean.upload()}" />
-                
-            
-            
-            
-<!--comment 
-            <div class="film-container">
-                <h1>Film Foto : </h1>
-                <input type="file" name="dosya" accept="video/*" class="filmEkleme fragmani" />
+               <div class="film-container">
+                <h1> Platform : </h1>
+                <h:inputText  value="#{filmveDiziBean.entity.platform.platform_adi}" styleClass="filmEkleme adi" ></h:inputText>
             </div>
--->
+            
+               <div class="film-container">
+                <h1> Imdb : </h1>
+                <h:inputText  value="#{filmveDiziBean.entity.imdb.imdb}" styleClass="filmEkleme adi" ></h:inputText>
+            </div>
+            
+             <div class="film-container">
+                <h1> Film'in Fotoğrafi : </h1>
+                <h:inputFile value="#{filmveDiziBean.doc}" name="file"/>
+            </div>
+
             <div class="film-container">
                 <h1>Vizyonda ya da TrenddeMi : </h1>
                 <h:selectOneMenu styleClass="browsers" value="#{filmveDiziBean.entity.seçilenVizyonTrends}">
@@ -72,12 +70,10 @@
                 </h:selectOneMenu>
             </div>
 
-            <h:commandButton value="Ekle" action="#{filmveDiziBean.create}" styleClass="filmEkleButton">
-                <f:ajax execute="film-islemleri" render="film-islemleri"/>
-            </h:commandButton>        
-
-
+            <h:commandButton value="Ekle" action="#{filmveDiziBean.create}" styleClass="filmEkleButton" />
         </h:form>
     </ui:define>
 
 </ui:composition>
+
+

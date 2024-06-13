@@ -32,20 +32,26 @@ public class KullanıcıFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) sr1;
 
         String url = req.getRequestURI();
-        HttpSession session = req.getSession();
-        Kullanıcı kullanıcı = (Kullanıcı) session.getAttribute("validUser");
 
-        if (kullanıcı == null) {
-            if (url.contains("girişKısmı")) {
-                res.sendRedirect(req.getContextPath() + "/girişKısmı.xhtml");
-            } else {
-                if (url.contains("logout")) {
-                    res.sendRedirect(req.getContextPath() + "/girişKısmı.xhtml");
-                }
-            }
+        HttpSession session = req.getSession(); // Mevcut oturumu almak için false
+
+        Kullanıcı kullanıcı = null;
+
+        if (session != null) {
+            kullanıcı = (Kullanıcı) session.getAttribute("validUser");
         }
 
-        chain.doFilter(sr, sr1);
+        if (kullanıcı == null) {
+
+            if ((url.contains("KullaniciPaneli/Film") || url.contains("KullaniciPaneli/Dizi") || url.contains("TrenddekiDiziler") || url.contains("VizyondakiFilmler") || url.contains("Kitaplik") || url.contains("Iletisim"))) {
+                res.sendRedirect(req.getContextPath()+"/KullaniciPaneli/girisYap.xhtml");
+            } else {
+                chain.doFilter(sr, sr1);
+            }
+        } else {
+            chain.doFilter(sr, sr1);
+        }
+
         /*
         if(session !=null){
             admin=(Admin) session.getAttribute("user");
@@ -57,6 +63,5 @@ public class KullanıcıFilter implements Filter {
             chain.doFilter(sr, sr1);
         }
          */
-
     }
 }

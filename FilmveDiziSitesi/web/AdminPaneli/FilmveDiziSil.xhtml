@@ -11,13 +11,13 @@
     <ui:define name="title">Film Silme İşlemleri</ui:define>
 
     <ui:define name="geriButtonTemplate">
-        <h:commandLink value="Geri" action="FilmveDiziIslemleri.xhtml" styleClass="geriButton" />
+        <h:commandLink value="Geri" action="FilmveDiziİslemleri.xhtml" styleClass="geriButton" />
     </ui:define>
 
     <ui:define name="silmeKısımlari">
         <h:dataTable value="#{filmveDiziBean.list}" var="film"  styleClass="table table-striped">
 
-            <h:column  styleClass="font-weight-bold " style="text-align: center;">
+           <h:column  styleClass="font-weight-bold " style="text-align: center;">
                 <f:facet   name="header" styleClass="orta">İD</f:facet>
                 <p style="text-align: center;">#{film.id} </p>
             </h:column>
@@ -53,6 +53,21 @@
             </h:column>
 
             <h:column styleClass="font-weight-bold"  style="text-align: center;">
+                <f:facet   name="header">İmdb</f:facet>
+                <p  style="text-align: center;">#{film.imdb.imdb}</p>
+            </h:column>
+            
+            <h:column styleClass="font-weight-bold"  style="text-align: center;">
+                <f:facet   name="header">Platform</f:facet>
+                <p  style="text-align: center;">#{film.platform.platform_adi}</p>
+            </h:column>
+            
+            <h:column styleClass="font-weight-bold"  style="text-align: center;">
+                <f:facet   name="header">Fotograflar</f:facet>
+                <p  style="text-align: center;">#{film.document.fileName}</p>
+            </h:column>
+            
+            <h:column styleClass="font-weight-bold"  style="text-align: center;">
                 <f:facet   name="header">Vizyon ya da TrenddeMi</f:facet>
                 <p style="text-align: center;">#{film.vizyontrendd}</p>
             </h:column>
@@ -60,21 +75,15 @@
             <h:column styleClass="font-weight-bold" >
                 <f:facet   name="header">İşlem</f:facet>
                 <div class="button-flex">
-                    <h:commandButton styleClass="btn btn-danger button"  value="Sil" action="#{filmveDiziBean.delete(film)}" >
-                    </h:commandButton>
+                    <h:commandButton styleClass="btn btn-danger button"  value="Sil" action="#{filmveDiziBean.delete(film)}"  />
                     <h:commandButton styleClass="btn btn-primary button" value="Güncelle"  action="#{filmveDiziBean.navigateToGuncellePage(film.id)}"  />
                 </div>
-
-
 
             </h:column>
 
         </h:dataTable>
 
-        <div class="btn-group">
-            <h:commandButton action="#{filmveDiziBean.prev()}" value="geri" styleClass="btn btn-outline-dark"></h:commandButton>
-            <h:commandButton action="#{filmveDiziBean.next()}" value="ileri" styleClass="btn btn-outline-dark"></h:commandButton>
-        </div>
+      
     </ui:define>
 
 </ui:composition>

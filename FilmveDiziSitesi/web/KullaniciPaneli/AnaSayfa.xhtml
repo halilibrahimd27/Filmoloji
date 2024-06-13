@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>AnaSayfa</title>
         <h:outputStylesheet  name="/kullanicipanelicss/reset.css" />
@@ -53,13 +54,14 @@
             <header class="header">
                 <div class="header-left">
                     <h:form styleClass="header-left-form">
-                        <h:commandButton action="AnaSayfa.xhtml" styleClass="navbtn" value="AnaSayfa"></h:commandButton>
-                        <h:commandButton action="Film.xhtml" styleClass="navbtn" value="Filmler"></h:commandButton>
-                        <h:commandButton action="Dizi.xhtml" styleClass="navbtn" value="Diziler"></h:commandButton>
-                        <h:commandButton action="VizyondakiFilmler.xhtml" styleClass="navbtn" value="Vizyondaki Filmler"></h:commandButton>
-                        <h:commandButton action="Trendeki Diziler.xhtml" styleClass="navbtn" value="Trenddeki Diziler"></h:commandButton>
-                        <h:commandButton action="Kitaplık.xhtml" styleClass="navbtn" value="Kitaplığım"></h:commandButton>
-                        <h:commandButton action="İletişim.xhtml" styleClass="navbtn" value="İletişim"></h:commandButton>
+                        <h:commandLink action="AnaSayfa?faces-redirect=true" styleClass="navbtn" value="AnaSayfa" />
+                        <h:commandLink action="Film?faces-redirect=true" styleClass="navbtn" value="Filmler" />
+                        <h:commandLink action="Dizi?faces-redirect=true" styleClass="navbtn" value="Diziler" />
+                        <h:commandLink action="VizyondakiFilmler?faces-redirect=true" styleClass="navbtn" value="Vizyondaki Filmler" />
+                        <h:commandLink action="TrenddekiDiziler?faces-redirect=true" styleClass="navbtn" value="Trenddeki Diziler" />
+                        <h:commandLink action="Kitaplik?faces-redirect=true" styleClass="navbtn" value="Kitaplığım" />
+                        <h:commandLink action="Iletisim?faces-redirect=true" styleClass="navbtn" value="İletişim" />
+
                     </h:form>
                 </div>
 
@@ -78,7 +80,7 @@
                             <span class="nomob">Üye Ol</span>
                         </h:commandLink>
 
-                        <h:commandLink  styleClass="small-button register" action="girişYap.xhtml">
+                        <h:commandLink styleClass="small-button register" action="girisYap.xhtml">
                             <i class="fas fa-user-plus"></i>
                             <span class="nomob">Üye Girişi</span>
                         </h:commandLink>
@@ -95,8 +97,8 @@
                         <h:outputText value="#{kullanıcıBean.entity.name}" styleClass="kullanıcıİsmi" id="a" />
                     </div>
                 </h:form>
-                
-                
+
+
 
                 <h:form rendered="#{validUser!=null}">
                     <h:commandButton action="#{kullanıcıBean.logout()}" value="logout" styleClass="buttonsss"/>
@@ -105,111 +107,97 @@
             </header>
 
             <section class="section">
-                <div id="carousel1" class="carousel slide w-50 mx-auto" data-ride="carousel">
-                    <a href="Film.xhtml" class="filmTitle">Filmler</a>
+                <!-- First Carousel -->
+                <!-- Film Carousel -->
+                <div id="filmCarousel" class="carousel slide w-50 mx-auto" data-ride="carousel">
                     <div class="carousel-inner" style="position: relative;">
-                        <div class="carousel-item active">
-                            <h:graphicImage styleClass="d-block w-100" library="images" name="recepivedik.jpg" alt="First slide"/>
-                            <h1 class="item-h1">Recep ivedik 7</h1>
-                        </div>
-                        <div class="carousel-item">
-                            <h:graphicImage styleClass="d-block w-100" library="images" name="labirentölümcülkacçış1.jpg" alt="Second slide"/>
-                            <h1 class="item-h1">Labirent ölümcül kaçış</h1>
-                        </div>
-                        <div class="carousel-item">
-                            <h:graphicImage styleClass="d-block w-100" library="images" name="karayip-korsanlari-olu-adamin-sandigi.jpeg" alt="Third slide"/>
-                            <h1 class="item-h1">Karayip Korsanları Ölü adamın sandığı</h1>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel1" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel1" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+                        <h1 style="color:white">Filmler</h1>
+                        <ui:repeat value="#{filmveDiziBean.list}" var="filmvedizi" varStatus="status">
+                            <h:panelGroup rendered="#{filmvedizi.tur == 'Film'}">
+                                <div class="carousel-item #{status.index == 0 ? 'active' : ''}">
+                                    <h:graphicImage library="images" value="/file/#{filmvedizi.document.fileName}" styleClass="d-block w-100" alt="Slide #{status.index + 1}"/>
+                                    <h1 class="item-h1">#{filmvedizi.adi}</h1>
+                                </div>
+                            </h:panelGroup>
+                        </ui:repeat>
                     </div>
+                    <a class="carousel-control-prev" href="#filmCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#filmCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
 
-                <div id="carousel2" class="carousel slide w-50 mx-auto" data-ride="carousel">
-                    <a href="Dizi.xhtml" class="filmTitle">Diziler</a>
+                <!-- Dizi Carousel -->
+                <div id="diziCarousel" class="carousel slide w-50 mx-auto" data-ride="carousel">
                     <div class="carousel-inner" style="position: relative;">
-                        <div class="carousel-item active">
-                            <h:graphicImage styleClass="d-block w-100" library="images" name="recepivedik.jpg" alt="First slide"/>
-                            <h1 class="item-h1">Recep ivedik 7</h1>
-                        </div>
-                        <div class="carousel-item">
-                            <h:graphicImage styleClass="d-block w-100" library="images" name="labirentölümcülkacçış1.jpg" alt="Second slide"/>
-                            <h1 class="item-h1">Labirent ölümcül kaçış</h1>
-                        </div>
-                        <div class="carousel-item">
-                            <h:graphicImage styleClass="d-block w-100" library="images" name="karayip-korsanlari-olu-adamin-sandigi.jpeg" alt="Third slide"/>
-                            <h1 class="item-h1">Karayip Korsanları Ölü adamın sandığı</h1>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel2" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel2" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+                          <h1 style="color:white">Diziler</h1>
+                        <ui:repeat value="#{filmveDiziBean.list}" var="filmvedizi" varStatus="status">
+                            <h:panelGroup rendered="#{filmvedizi.tur == 'Dizi'}">
+                                <div class="carousel-item #{status.index == 0 ? 'active' : ''}">
+                                    <h:graphicImage library="images" value="/file/#{filmvedizi.document.fileName}" styleClass="d-block w-100" alt="Slide #{status.index + 1}"/>
+                                    <h1 class="item-h1">#{filmvedizi.adi}</h1>
+                                </div>
+                            </h:panelGroup>
+                        </ui:repeat>
                     </div>
-                </div>
-                <div id="carousel3" class="carousel slide w-50 mx-auto" data-ride="carousel">
-                    <a href="Trendeki Diziler.xhtml" class="filmTitle">Trendeki Diziler</a>
-                    <div class="carousel-inner" style="position: relative;">
-                        <div class="carousel-item active">
-                            <h:graphicImage styleClass="d-block w-100" library="images" name="recepivedik.jpg" alt="First slide"/>
-                            <h1 class="item-h1">Recep ivedik 7</h1>
-                        </div>
-                        <div class="carousel-item">
-                            <h:graphicImage styleClass="d-block w-100" library="images" name="labirentölümcülkacçış1.jpg" alt="Second slide"/>
-                            <h1 class="item-h1">Labirent ölümcül kaçış</h1>
-                        </div>
-                        <div class="carousel-item">
-                            <h:graphicImage styleClass="d-block w-100" library="images" name="karayip-korsanlari-olu-adamin-sandigi.jpeg" alt="Third slide"/>
-                            <h1 class="item-h1">Karayip Korsanları Ölü adamın sandığı</h1>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel3" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel3" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
+                    <a class="carousel-control-prev" href="#diziCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#diziCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
 
-                <div id="carousel4" class="carousel slide w-50 mx-auto" data-ride="carousel">
-                    <a href="VizyondakiFilmler.xhtml" class="filmTitle">Vizyondaki Filmler</a>
+                <!-- Second Carousel with Unique ID -->
+                <div id="trendCarousel" class="carousel slide w-50 mx-auto" data-ride="carousel">
                     <div class="carousel-inner" style="position: relative;">
-                        <div class="carousel-item active">
-                            <h:graphicImage styleClass="d-block w-100" library="images" name="recepivedik.jpg" alt="First slide"/>
-                            <h1 class="item-h1">Recep ivedik 7</h1>
-                        </div>
-                        <div class="carousel-item">
-                            <h:graphicImage styleClass="d-block w-100" library="images" name="labirentölümcülkacçış1.jpg" alt="Second slide"/>
-                            <h1 class="item-h1">Labirent ölümcül kaçış</h1>
-                        </div>
-                        <div class="carousel-item">
-                            <h:graphicImage styleClass="d-block w-100" library="images" name="karayip-korsanlari-olu-adamin-sandigi.jpeg" alt="Third slide"/>
-                            <h1 class="item-h1">Karayip Korsanları Ölü adamın sandığı</h1>
-                        </div>
-                        <a class="carousel-control-prev" href="#carousel4" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel4" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+                         <h1 style="color:white">Trenddeki Diziler</h1>
+                        <ui:repeat value="#{trenddekiDizilerBean.list}" var="filmvedizii" varStatus="status">
+                            <div class="carousel-item #{status.index == 0 ? 'active' : ''}">
+                                <h:graphicImage library="images" value="/file/#{filmvedizii.document.fileName}" styleClass="d-block w-100" alt="Slide #{status.index + 1}"/>
+                                <h1 class="item-h1">#{filmvedizii.adi}</h1>
+                            </div>
+                        </ui:repeat>
                     </div>
+                    <a class="carousel-control-prev" href="#trendCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#trendCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+                <div id="vizyonCarousel" class="carousel slide w-50 mx-auto" data-ride="carousel">
+                    <div class="carousel-inner" style="position: relative;">
+                           <h1 style="color:white">Vizyondaki Filmler</h1>
+                        <ui:repeat value="#{vizyondakiFilmlerBean.list}" var="filmvedizii" varStatus="status">
+                            <div class="carousel-item #{status.index == 0 ? 'active' : ''}">
+                                <h:graphicImage library="images" value="/file/#{filmvedizii.document.fileName}" styleClass="d-block w-100" alt="Slide #{status.index + 1}"/>
+                                <h1 class="item-h1">#{filmvedizii.adi}</h1>
+                            </div>
+                        </ui:repeat>
+                    </div>
+                    <a class="carousel-control-prev" href="#vizyonCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#vizyonCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
 
 
             </section>
+
 
 
 

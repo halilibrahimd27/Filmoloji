@@ -4,161 +4,364 @@
  */
 package dao;
 
+import entity.Document;
 import entity.FilmveDizi;
-import jakarta.resource.cci.Connection;
+import entity.Platform;
+import entity.İmdb;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import util.DBConnection;
+import java.sql.PreparedStatement;
 
 /**
  *
  * @author semih
  */
 public class FilmveDiziDao extends DBConnection {
-    
-    private Connection connection;
-    
-    
-    public List<FilmveDizi> findAll(){
-        List<FilmveDizi> fdList = new ArrayList<>();
-        
-        try{
-            PreparedStatement pst = this.getConnect().prepareStatement("select * from filmdizi ");
-            ResultSet rs=pst.executeQuery();
-            while(rs.next()){
-                FilmveDizi d =new FilmveDizi();
-                d.setId(rs.getInt("id"));
-                d.setFilePath("path");
-                d.setFileName("name");
-                d.setFileType("type");
-                
-                
-                        
-                fdList.add(d);
-            }
-            
-        
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
-        
-        return fdList;
-    }
+
+    private VizyondakiFilmlerDAO vfd;
+    private TrenddekiDizilerDAO tfd;
+    private PlatformDao ptd;
+    private İmdbDao imdb;
+    private DocumentDao dcd;
 
     public void create(FilmveDizi fd) {
 
         try {
+            PreparedStatement pst = this.getConnect().prepareStatement("INSERT INTO filmvedizi (tur, adi, konusu, kategorisi, yonetmen_adi, oyuncular, vizyontrend) VALUES(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            pst.setString(1, fd.getTur());
+            pst.setString(2, fd.getAdi());
+            pst.setString(3, fd.getKonusu());
+            pst.setString(4, fd.getGönderilecekKategori());
+            pst.setString(5, fd.getYonetmen_adi());
+            pst.setString(6, fd.getOyuncular());
+            pst.setBoolean(7, fd.isVizyontrend());
+            pst.executeUpdate();
 
-            Statement st = (Statement) this.getConnect().createStatement();
-            st.executeUpdate("INSERT INTO filmvedizi (tur, adi, konusu, kategorisi, yonetmen_adi, oyuncular, vizyontrend) VALUES ('"
-                    + fd.getTur() + "','"
-                    + fd.getAdi() + "','"
-                    + fd.getKonusu() + "','"
-                    + fd.getGönderilecekKategori() + "','"
-                    + fd.getYonetmen_adi() + "','"
-                    + fd.getOyuncular() + "',"
-                    + fd.isVizyontrend() + ")");
+            ResultSet generatedKeys = pst.getGeneratedKeys();
+            int newFilmDiziId = 0;
+            if (generatedKeys.next()) {
+                newFilmDiziId = generatedKeys.getInt(1);
+            }
 
+            fd.setId(newFilmDiziId);
+
+            this.getPtd().create(fd.getPlatform(), newFilmDiziId);
+            this.getImdb().create(fd.getImdb(), newFilmDiziId);
+            this.getDcd().create(fd.getDocument(), newFilmDiziId);
+
+            if (fd.isVizyontrend() && fd.getTur().equals("Film")) {
+                this.getVfd().create(fd);
+            } else if (fd.isVizyontrend() && fd.getTur().equals("Dizi")) {
+                this.getTfd().create(fd);
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
+    
+    
 
-    public List<FilmveDizi> getFilmolojiList(int page, int pageSize) {
-
+    public List<FilmveDizi> getFilmolojiList() {
         List<FilmveDizi> categoryList = new ArrayList<>();
 
-        int start = ((page - 1) * pageSize);
-        int son = start + 5;
         try {
+            String query = "SELECT f.id, f.tur, f.adi, f.konusu, f.kategorisi, f.yonetmen_adi, f.oyuncular, f.vizyontrend, "
+                    + "i.imdb_id, i.imdb, p.platform_id, p.platform, d.id AS document_id, d.filepath, d.filename, d.filetype "
+                    + "FROM filmvedizi f "
+                    + "LEFT JOIN imdb i ON f.id = i.df_id "
+                    + "LEFT JOIN platform p ON f.id = p.df_id "
+                    + "LEFT JOIN documents d ON f.id = d.df_id";
+            PreparedStatement statement = this.getConnect().prepareStatement(query);
 
-            Statement st = (Statement) this.getConnect().createStatement();
+            ResultSet resultSet = statement.executeQuery();
 
-            String query = "SELECT * FROM filmvedizi WHERE id BETWEEN " + start + " AND " + son;
-            ResultSet rs = st.executeQuery(query);
+            while (resultSet.next()) {
+                // Create IMDb object
+                İmdb imdb = new İmdb(
+                        resultSet.getString("imdb"),
+                        resultSet.getInt("id")
+                );
 
-            while (rs.next()) {
+                // Create Platform object
+                Platform platform = new Platform(
+                        resultSet.getInt("platform_id"),
+                        resultSet.getString("platform")
+                );
 
-                categoryList.add(new FilmveDizi(rs.getInt("id"), rs.getString("tur"), rs.getString("adi"), rs.getString("konusu"), rs.getString("kategorisi"), rs.getString("yonetmen_adi"), rs.getString("oyuncular"), rs.getBoolean("vizyontrend")));
+                // Create Document object
+                Document document = new Document(
+                        resultSet.getInt("document_id"),
+                        resultSet.getString("filepath"),
+                        resultSet.getString("filename"),
+                        resultSet.getString("filetype")
+                );
+
+                // Create FilmveDizi object
+                FilmveDizi filmveDizi = new FilmveDizi(
+                        resultSet.getInt("id"),
+                        resultSet.getString("tur"),
+                        resultSet.getString("adi"),
+                        resultSet.getString("konusu"),
+                        resultSet.getString("kategorisi"), // assuming kategori is a single string
+                        resultSet.getString("yonetmen_adi"),
+                        resultSet.getString("oyuncular"),
+                        resultSet.getBoolean("vizyontrend"),
+                        imdb,
+                        platform,
+                        document
+                );
+
+                categoryList.add(filmveDizi);
             }
 
+            resultSet.close();
+            statement.close();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
         return categoryList;
     }
 
-    public void update(FilmveDizi fd) throws SQLException  {
+    public FilmveDizi getFilmeGirenKısım(int id) {
+        System.out.println(id);
+        List<FilmveDizi> seçilenFilm = new ArrayList<>();
+        FilmveDizi filmveDizi = null;
+        try {
 
-        Statement st = (Statement) this.getConnect().createStatement();
-        String sql = "UPDATE filmvedizi SET "
-                + "tur='" + fd.getTur() + "', "
-                + "adi='" + fd.getAdi() + "', "
-                + "konusu='" + fd.getKonusu() + "', "
-                + "kategorisi='" + fd.getGönderilecekKategori() + "', "
-                + "yonetmen_adi='" + fd.getYonetmen_adi() + "', "
-                + "oyuncular='" + fd.getOyuncular() + "', "
-                + "vizyontrend=" + (fd.isVizyontrend()) + " "
-                + "WHERE id=" + fd.getId();
+            String query = "SELECT f.id, f.tur, f.adi, f.konusu, f.kategorisi, f.yonetmen_adi, f.oyuncular, f.vizyontrend, "
+                    + "i.imdb_id, i.imdb, p.platform_id, p.platform, d.id AS document_id, d.filepath, d.filename, d.filetype "
+                    + "FROM filmvedizi f "
+                    + "LEFT JOIN imdb i ON f.id = i.df_id "
+                    + "LEFT JOIN platform p ON f.id = p.df_id "
+                    + "LEFT JOIN documents d ON f.id = d.df_id "
+                    + "WHERE f.id = ?";
 
-        st.executeUpdate(sql);
+            PreparedStatement statement = this.getConnect().prepareStatement(query);
+            statement.setInt(1, id); // ID parametresini ayarlama
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                // Create IMDb object
+                İmdb imdb = new İmdb(
+                        resultSet.getString("imdb")
+                );
+
+                // Create Platform object
+                Platform platform = new Platform(
+                        resultSet.getString("platform")
+                );
+
+                // Create Document object
+                Document document = new Document(
+                        resultSet.getString("filepath"),
+                        resultSet.getString("filename"),
+                        resultSet.getString("filetype")
+                );
+
+                // Create FilmveDizi object
+                filmveDizi = new FilmveDizi(
+                        resultSet.getInt("id"),
+                        resultSet.getString("tur"),
+                        resultSet.getString("adi"),
+                        resultSet.getString("konusu"),
+                        resultSet.getString("kategorisi"), // assuming kategori is a single string
+                        resultSet.getString("yonetmen_adi"),
+                        resultSet.getString("oyuncular"),
+                        resultSet.getBoolean("vizyontrend"),
+                        imdb,
+                        platform,
+                        document
+                );
+
+            }
+
+            resultSet.close();
+            statement.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return filmveDizi;
+    }
+
+    public List<FilmveDizi> getKategoriList(String seçilenKateogri) {
+        List<FilmveDizi> categoryList = new ArrayList<>();
+
+        try {
+            String query = "SELECT f.id, f.tur, f.adi, f.konusu, f.kategorisi, f.yonetmen_adi, f.oyuncular, f.vizyontrend, "
+                    + "i.imdb_id, i.imdb, p.platform_id, p.platform, d.id AS document_id, d.filepath, d.filename, d.filetype "
+                    + "FROM filmvedizi f "
+                    + "LEFT JOIN imdb i ON f.id = i.df_id "
+                    + "LEFT JOIN platform p ON f.id = p.df_id "
+                    + "LEFT JOIN documents d ON f.id = d.df_id "
+                    + "WHERE f.kategorisi LIKE ?";
+            PreparedStatement statement = this.getConnect().prepareStatement(query);
+
+// Parametre olarak gelen kategori değerinin başına ve sonuna % işareti ekleyin
+            statement.setString(1, "%" + seçilenKateogri + "%");
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                // Create IMDb object
+                İmdb imdb = new İmdb(
+                        resultSet.getString("imdb"),
+                        resultSet.getInt("id")
+                );
+
+                // Create Platform object
+                Platform platform = new Platform(
+                        resultSet.getInt("platform_id"),
+                        resultSet.getString("platform")
+                );
+
+                // Create Document object
+                Document document = new Document(
+                        resultSet.getInt("document_id"),
+                        resultSet.getString("filepath"),
+                        resultSet.getString("filename"),
+                        resultSet.getString("filetype")
+                );
+
+                // Create FilmveDizi object
+                FilmveDizi filmveDizi = new FilmveDizi(
+                        resultSet.getInt("id"),
+                        resultSet.getString("tur"),
+                        resultSet.getString("adi"),
+                        resultSet.getString("konusu"),
+                        resultSet.getString("kategorisi"), // assuming kategori is a single string
+                        resultSet.getString("yonetmen_adi"),
+                        resultSet.getString("oyuncular"),
+                        resultSet.getBoolean("vizyontrend"),
+                        imdb,
+                        platform,
+                        document
+                );
+
+                categoryList.add(filmveDizi);
+            }
+
+            resultSet.close();
+            statement.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return categoryList;
+    }
+
+    public void update(FilmveDizi fd) throws SQLException {
+
+        String query1 = "UPDATE filmvedizi SET tur=?, adi=?, konusu=?, kategorisi=?, yonetmen_adi=?, oyuncular=?, vizyontrend=? WHERE id=?";
+        PreparedStatement pst1 = this.getConnect().prepareStatement(query1);
+        pst1.setString(1, fd.getTur());
+        pst1.setString(2, fd.getAdi());
+        pst1.setString(3, fd.getKonusu());
+        pst1.setString(4, fd.getGönderilecekKategori());
+        pst1.setString(5, fd.getYonetmen_adi());
+        pst1.setString(6, fd.getOyuncular());
+        pst1.setBoolean(7, fd.isVizyontrend());
+        pst1.setInt(8, fd.getId());
+        pst1.executeUpdate();
+
+        // Update imdb table
+        if (fd.getImdb() != null) {
+            String query2 = "UPDATE imdb SET imdb=? WHERE filmvedizi_id=?";
+            PreparedStatement pst2 = this.getConnect().prepareStatement(query2);
+            pst2.setString(1, fd.getImdb().getImdb());
+            pst2.executeUpdate();
+        }
+
+        // Update platform table
+        if (fd.getPlatform() != null) {
+            String query3 = "UPDATE platform SET platform=? WHERE filmvedizi_id=?";
+            PreparedStatement pst3 = this.getConnect().prepareStatement(query3);
+            pst3.setString(1, fd.getPlatform().getPlatform_adi());
+            pst3.executeUpdate();
+        }
+
+        // Update documents table
+        if (fd.getDocument() != null) {
+            String query4 = "UPDATE documents SET filepath=?, filename=?, filetype=? WHERE filmvedizi_id=?";
+            PreparedStatement pst4 = this.getConnect().prepareStatement(query4);
+            pst4.setString(1, fd.getDocument().getFilePath());
+            pst4.setString(2, fd.getDocument().getFileName());
+            pst4.setString(3, fd.getDocument().getFileType());
+            pst4.executeUpdate();
+        }
 
     }
-    
-    
+
     public void delete(FilmveDizi fd) {
         try {
 
             Statement st = (Statement) this.getConnect().createStatement();
 
-            String query0 = "UPDATE filmvedizi SET id = id - 1 WHERE id > " + fd.getId();
             String query1 = "DELETE from filmvedizi where id=" + fd.getId();
             st.executeUpdate(query1);
-            st.executeUpdate(query0);
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
 
     }
-    
-    
 
-    public int count() {
-
-        int count = 0;
-
-        List<FilmveDizi> categoryList = new ArrayList<>();
-
-        try {
-
-            Statement st = (Statement) this.getConnect().createStatement();
-
-            String query = "select count(df_id) as film_count from dizifilm";
-            ResultSet rs = st.executeQuery(query);
-            rs.next();
-            count = rs.getInt("film_count");
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+    public VizyondakiFilmlerDAO getVfd() {
+        if (vfd == null) {
+            vfd = new VizyondakiFilmlerDAO();
         }
-        return count;
+        return vfd;
     }
 
-    public Connection getConnection() {
-        return connection;
+    public void setVfd(VizyondakiFilmlerDAO vfd) {
+        this.vfd = vfd;
     }
 
-    public void setConnection(Connection connection) {
-        this.connection = connection;
+    public TrenddekiDizilerDAO getTfd() {
+        if (tfd == null) {
+            tfd = new TrenddekiDizilerDAO();
+        }
+        return tfd;
     }
 
-   
-    
-    
+    public void setTfd(TrenddekiDizilerDAO tfd) {
+        this.tfd = tfd;
+    }
+
+    public PlatformDao getPtd() {
+        if (this.ptd == null) {
+            ptd = new PlatformDao();
+        }
+        return ptd;
+    }
+
+    public void setPtd(PlatformDao ptd) {
+        this.ptd = ptd;
+    }
+
+    public İmdbDao getImdb() {
+        if (this.imdb == null) {
+            imdb = new İmdbDao();
+        }
+        return imdb;
+    }
+
+    public void setImdb(İmdbDao imdb) {
+        this.imdb = imdb;
+    }
+
+    public DocumentDao getDcd() {
+        if (this.dcd == null) {
+            this.dcd = new DocumentDao();
+        }
+        return dcd;
+    }
+
+    public void setDcd(DocumentDao dcd) {
+        this.dcd = dcd;
+    }
 
 }

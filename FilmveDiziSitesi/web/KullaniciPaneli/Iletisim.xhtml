@@ -22,13 +22,13 @@
             <header class="header">
                 <div class="header-left">
                     <h:form styleClass="header-left-form">
-                        <h:commandButton action="AnaSayfa.xhtml" styleClass="navbtn" value="AnaSayfa"></h:commandButton>
-                        <h:commandButton action="Film.xhtml" styleClass="navbtn" value="Filmler"></h:commandButton>
-                        <h:commandButton action="Dizi.xhtml" styleClass="navbtn" value="Diziler"></h:commandButton>
-                        <h:commandButton action="VizyondakiFilmler.xhtml" styleClass="navbtn" value="Vizyondaki Filmler"></h:commandButton>
-                        <h:commandButton action="Trendeki Diziler.xhtml" styleClass="navbtn" value="Trenddeki Diziler"></h:commandButton>
-                        <h:commandButton action="Kitaplık.xhtml" styleClass="navbtn" value="Kitaplığım"></h:commandButton>
-                        <h:commandButton action="İletişim.xhtml" styleClass="navbtn" value="İletişim"></h:commandButton>
+                        <h:commandLink action="AnaSayfa?faces-redirect=true" styleClass="navbtn" value="AnaSayfa" />
+                        <h:commandLink action="Film?faces-redirect=true" styleClass="navbtn" value="Filmler" />
+                        <h:commandLink action="Dizi?faces-redirect=true" styleClass="navbtn" value="Diziler" />
+                        <h:commandLink action="VizyondakiFilmler?faces-redirect=true" styleClass="navbtn" value="Vizyondaki Filmler" />
+                        <h:commandLink action="TrenddekiDiziler?faces-redirect=true" styleClass="navbtn" value="Trenddeki Diziler" />
+                        <h:commandLink action="Kitaplik?faces-redirect=true" styleClass="navbtn" value="Kitaplığım" />
+                        <h:commandLink action="Iletisim?faces-redirect=true" styleClass="navbtn" value="İletişim" />
                     </h:form>
                 </div>
 
@@ -47,7 +47,7 @@
                             <span class="nomob">Üye Ol</span>
                         </h:commandLink>
 
-                        <h:commandLink  styleClass="small-button register" action="girişYap.xhtml">
+                        <h:commandLink  styleClass="small-button register" action="girisYap.xhtml">
                             <i class="fas fa-user-plus"></i>
                             <span class="nomob">Üye Girişi</span>
                         </h:commandLink>

@@ -146,7 +146,7 @@ public class SuperAdminBean implements Serializable {
     }
 
     public List<SuperAdmin> getList() {
-        this.list = getDao().getAdminList(page, pageSize);
+        this.list = getDao().getAdminList();
         return list;
     }
 

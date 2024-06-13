@@ -46,22 +46,21 @@ public class SuperAdminDAO extends DBConnection{
     
     }
     
-    public List<SuperAdmin> getAdminList(int page, int pageSize) {
+    public List<SuperAdmin> getAdminList() {
 
         List<SuperAdmin> adminList = new ArrayList<>();
 
-        int start = ((page - 1) * pageSize);
-        int son = start + 5;
+        
         try {
 
             Statement st = (Statement) this.getConnect().createStatement();
 
-            String query = "SELECT * FROM admin WHERE id BETWEEN " + start + " AND " + son;
+            String query = "SELECT * FROM admin " ;
             ResultSet rs = st.executeQuery(query);
 
             while (rs.next()) {
 
-                adminList.add(new SuperAdmin(rs.getInt("admin_id"), rs.getString("username"), rs.getString("password"), rs.getString("email")));
+                adminList.add(new SuperAdmin(rs.getInt("admin_id"), rs.getString("username"), rs.getString("email"), rs.getString("password")));
             }
 
         } catch (Exception ex) {
@@ -90,8 +89,8 @@ public class SuperAdminDAO extends DBConnection{
 
             Statement st = (Statement) this.getConnect().createStatement();
 
-            String query0 = "UPDATE admin SET id = id - 1 WHERE id > " + sa.getId();
-            String query1 = "DELETE from admin where id=" + sa.getId();
+            String query0 = "UPDATE admin SET admin_id = admin_id - 1 WHERE admin_id > " + sa.getId();
+            String query1 = "DELETE from admin where admin_id=" + sa.getId();
             st.executeUpdate(query1);
             st.executeUpdate(query0);
 

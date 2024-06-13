@@ -1,13 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
- */
 package entity;
 
 import jakarta.inject.Named;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.event.ValueChangeEvent;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,35 +29,13 @@ public class FilmveDizi {
     private String vizyontrendd;
     private boolean vizyontrend;
     
-    private String filePath;
-    private String fileName;
-    private String fileType;
-
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public String getFileType() {
-        return fileType;
-    }
-
-    public void setFileType(String fileType) {
-        this.fileType = fileType;
-    }
+    private String kullanicininSectigiKategori;
     
+    private İmdb imdb;
+    private Platform platform;
+    private Document document;
     
+
 
     public FilmveDizi() {
         kategoriler = new ArrayList<>();
@@ -68,7 +46,7 @@ public class FilmveDizi {
         kategoriler.add("Bilim-Kurgu");
     }
 
-    public FilmveDizi(int id, String tur, String adi, String konusu, String gönderilecekKategori, String yonetmen_adi, String oyuncular, boolean vizyontrend) {
+    public FilmveDizi(int id, String tur, String adi, String konusu, String gönderilecekKategori, String yonetmen_adi, String oyuncular, boolean vizyontrend,İmdb imdb,Platform platform,Document document) {
         this.id = id;
         this.tur = tur;
         this.adi = adi;
@@ -77,6 +55,9 @@ public class FilmveDizi {
         this.yonetmen_adi = yonetmen_adi;
         this.oyuncular = oyuncular;
         this.vizyontrend = vizyontrend;
+        this.imdb=imdb;
+        this.platform=platform;
+        this.document=document;
 
         if (this.vizyontrend) {
             this.setVizyontrendd("Evet");
@@ -144,7 +125,15 @@ public class FilmveDizi {
             }
             builder.append(deger);
         }
-        this.gönderilecekKategori = builder.toString();
+
+        if (kategoriler.size() == secilenkategoriler.size()) {
+            this.gönderilecekKategori = "Hepsi";
+        } else {
+          this.gönderilecekKategori = builder.toString();
+        }
+
+        
+
         System.out.println("as" + this.gönderilecekKategori);
 
     }
@@ -219,5 +208,49 @@ public class FilmveDizi {
     public void setVizyontrend(boolean vizyontrend) {
         this.vizyontrend = vizyontrend;
     }
+
+    public String getKullanicininSectigiKategori() {
+        return kullanicininSectigiKategori;
+    }
+
+    public void setKullanicininSectigiKategori(String kullanicininSectigiKategori) {
+        this.kullanicininSectigiKategori = kullanicininSectigiKategori;
+    }
+
+    public İmdb getImdb() {
+        if(this.imdb==null){
+            imdb=new İmdb();
+        }
+        return imdb;
+    }
+
+    public void setImdb(İmdb imdb) {
+        this.imdb = imdb;
+    }
+
+    public Platform getPlatform() {
+        if(this.platform==null){
+            this.platform=new Platform();
+        }
+        return platform;
+    }
+
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
+    }
+
+    public Document getDocument() {
+        if(this.document==null){
+            document=new Document();
+        }
+        return document;
+    }
+
+    public void setDocument(Document document) {
+        this.document = document;
+    }
+    
+    
+
 
 }
