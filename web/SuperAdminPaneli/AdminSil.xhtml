@@ -11,7 +11,7 @@
     <ui:define name="title">Admin Silme İşlemleri</ui:define>
 
     <ui:define name="geriButtonTemplate">
-        <h:commandLink value="Geri" action="SuperAdminIslemleri.xhtml" styleClass="geriButton" />
+        <h:commandLink value="Geri" action="#{navigationBean.navigateTo('SuperAdminIslemleri')}"     styleClass="geriButton" />
     </ui:define>
 
     <ui:define name="silmeKısımlari">

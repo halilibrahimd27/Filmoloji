@@ -5,20 +5,15 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>İletişim</title>
-        <h:outputStylesheet  name="/kullanicipanelicss/reset.css" />
+        <h:outputStylesheet name="/kullanicipanelicss/reset.css" />
         <h:outputStylesheet library="css" name="bootstrap1.css" />
-        <h:outputStylesheet  name="/kullanicipanelicss/iletişim.css" />
+        <h:outputStylesheet name="/kullanicipanelicss/iletişim.css" />
         <script src="https://kit.fontawesome.com/66f2961287.js" crossorigin="anonymous"></script>
-        <!-- Bootstrap CSS -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <!-- Bootstrap JS -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
     </h:head>
     <h:body>
         <div class="containerr">
-
             <header class="header">
                 <div class="header-left">
                     <h:form styleClass="header-left-form">
@@ -41,17 +36,14 @@
 
                 <div class="header-right">
                     <h:form rendered="#{validUser==null}" id="header-right-form">
-
-                        <h:commandLink styleClass="small-button register" action="uyeOl.xhtml">
+                        <h:commandLink styleClass="small-button register" action="#{navigationBean.navigateTo('uyeOl')}">
                             <i class="fas fa-user-plus"></i>
                             <span class="nomob">Üye Ol</span>
                         </h:commandLink>
-
-                        <h:commandLink  styleClass="small-button register" action="girisYap.xhtml">
+                        <h:commandLink styleClass="small-button register" action="#{navigationBean.navigateTo('girisYap')}">
                             <i class="fas fa-user-plus"></i>
                             <span class="nomob">Üye Girişi</span>
                         </h:commandLink>
-
                     </h:form>
 
                     <h:form rendered="#{validUser!=null}">
@@ -62,35 +54,30 @@
                     </h:form>
 
                     <h:form rendered="#{validUser!=null}">
-                        <h:commandButton action="#{kullanıcıBean.logout()}" value="logout"/>
+                        <h:commandButton action="#{kullanıcıBean.logout()}" value="logout" />
                     </h:form>
-
                 </div>
-
-
             </header>
 
-            <h1 class="mesajiniz"> Mesajınız :</h1>
-            <h:form id="film-islemleri">
-                <h:inputTextarea styleClass="mesaj"  rows="8" cols="70" />
-                <h:commandButton value="Gönder"  styleClass="btn btn-succes"></h:commandButton>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Mesajınızı Yazın:" for="mesaj" style="color: blue"  />
+                    <h:inputTextarea id="mesaj" value="#{mesajlarBean.entity.mesaj}" cols="150" rows="5" required="true" requiredMessage="Mesaj boş olamaz." />
+
+                    <h:commandButton value="Gönder" action="#{mesajlarBean.create}" />
+                    <h:message for="mesaj" style="color:red" />
+                </h:panelGrid>
             </h:form>
-
         </div>
-
-
-
     </h:body>
+
     <footer>
         <div class="footer-top">
             <div class="container">
-
                 <div class="row">
                     <div class="col-lg-4">
-
                         <h4>Hakkımızda </h4>
-                        <p> FilmolojiFilmolojiFilmolojiFilmolojiFilmoloji  </p>
-
+                        <p> FilmolojiFilmolojiFilmolojiFilmolojiFilmoloji </p>
                     </div>
 
                     <div class="col-md-4">
@@ -98,7 +85,7 @@
                         <ul class="adresler">
                             <li><i class="fa fa-map-marker"></i>FilmolojiFilmolojiFilmolojiFilmoloji</li>
                             <li><i class="fa fa-envelope"></i><a href="mailto:#">filmoloji@gmail.com</a></li>
-                            <li><i class="fa fa-mobile" aria-hidden="true"></i> <a href="tel:4444 3844">444 3844</a></li>
+                            <li><i class="fa fa-mobile" aria-hidden="true"></i><a href="tel:4444 3844">444 3844</a></li>
                         </ul>
                     </div>
 
@@ -110,22 +97,15 @@
                             <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                         </ul>
                     </div>
-
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
             <div class="container">
-
                 <div class="col-sm-5">
-
-
                     <p class="copyright">&copy; Tüm Hakları <strong>Filmoloji'ye</strong> aittir.</p>
                 </div>
-
-
             </div>
         </div>
     </footer>
-
 </html>

@@ -29,7 +29,7 @@ public class FilmveDiziBean implements Serializable {
 
     private Part doc;
 
-    private final String uploadTo = "C:\\Temp\\upload";
+    private final String uploadTo = "/Users/berkaysari";
 
     public void upload() {
         if (doc != null) {
@@ -98,6 +98,7 @@ public class FilmveDiziBean implements Serializable {
     public void setDao(FilmveDiziDao dao) {
         this.dao = dao;
     }
+    
 
     public List<FilmveDizi> getList() {
         this.list = this.getDao().getFilmolojiList();

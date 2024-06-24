@@ -38,12 +38,12 @@
 
                 <div class="header-right">
                     <h:form rendered="#{validUser==null}" id="header-right-form">
-                        <h:commandLink styleClass="small-button register" action="girişKısmı.xhtml">
+                        <h:commandLink styleClass="small-button register" action="#{navigationBean.navigateTo('uyeOl')}">
                             <i class="fas fa-user-plus"></i>
                             <span class="nomob">Üye Ol</span>
                         </h:commandLink>
 
-                        <h:commandLink  styleClass="small-button register" action="girisYap.xhtml">
+                        <h:commandLink  styleClass="small-button register" action="#{navigationBean.navigateTo('girisYap')}">
                             <i class="fas fa-user-plus"></i>
                             <span class="nomob">Üye Girişi</span>
                         </h:commandLink>
@@ -177,7 +177,7 @@
                     <div class="film-fotografı-yazısı">
 
                         <div class="film-fotograf">
-                            <h:graphicImage library="images" value="/file/#{vizyondakiFilmlerBean.filmeGirenlist.document.fileName}"/>
+                            <h:graphicImage library="images" value="/file/#{vizyondakiFilmlerBean.filmeGirenlist.document.fileName}" style="width: 200px" />
 
                         </div>
 

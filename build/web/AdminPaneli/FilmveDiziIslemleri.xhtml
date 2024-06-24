@@ -8,8 +8,8 @@
     <ui:define name="title">FilmDizi İşlemleri</ui:define>
 
     <ui:define name="İşlemlerKısmi">
-        <h:commandLink value="FilmDizi Ekle" action="FilmveDiziEkle.xhtml" styleClass="islem" />
-        <h:commandLink value="FilmDizi Sil" action="FilmveDiziSil.xhtml" styleClass="islem" />
+        <h:commandLink value="FilmDizi Ekle" action="#{navigationBean.navigateTo('FilmveDiziEkle')}" styleClass="islem" />
+        <h:commandLink value="FilmDizi Sil" action="#{navigationBean.navigateTo('FilmveDiziSil')}" styleClass="islem" />
     </ui:define>
 
 </ui:composition>

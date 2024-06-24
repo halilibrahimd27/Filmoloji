@@ -41,12 +41,12 @@
 
                 <div class="header-right">
                     <h:form rendered="#{validUser==null}" id="header-right-form">
-                        <h:commandLink styleClass="small-button register" action="girişKısmı.xhtml">
+                        <h:commandLink styleClass="small-button register" action="#{navigationBean.navigateTo('uyeOl')}">
                             <i class="fas fa-user-plus"></i>
                             <span class="nomob">Üye Ol</span>
                         </h:commandLink>
 
-                        <h:commandLink  styleClass="small-button register" action="girisYap.xhtml">
+                        <h:commandLink  styleClass="small-button register" action="#{navigationBean.navigateTo('girisYap')}">
                             <i class="fas fa-user-plus"></i>
                             <span class="nomob">Üye Girişi</span>
                         </h:commandLink>
@@ -82,7 +82,7 @@
                             <div>
                                 <h:form>
                                     <h:commandLink action="#{vizyondakiFilmlerBean.setTiklananId(filmvedizi.fd.id)}" value="Gözat">
-                                        <h:graphicImage library="images" value="/file/#{filmvedizi.fd.document.fileName}" alt="Film/Dizi Resmi"/>
+                                        <h:graphicImage library="images" value="/file/#{filmvedizi.fd.document.fileName}" alt="Film/Dizi Resmi" style="width: 200px" />
                                         <span class="info">
                                             <span class="title">
                                                 <h2>Film'in Adı : #{filmvedizi.fd.adi}</h2>

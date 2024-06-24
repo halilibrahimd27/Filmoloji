@@ -85,6 +85,10 @@ public class FilmveDizi {
         }
 
     }
+        public FilmveDizi(int id , String adi){
+            this.id = id;
+            this.adi = adi;
+        }
     
     public int getId() {
         return id;

@@ -38,6 +38,10 @@ public class Kullanıcı  implements Serializable  {
         this.email = email;
         this.password = password;
     }
+    public Kullanıcı(int id, String name){
+        this.id = id;
+        this.name = name;
+    }
 
     public int getId() {
         return id;
@@ -69,6 +73,18 @@ public class Kullanıcı  implements Serializable  {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getKullanici_id() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setKullanici_id(int kullanici_id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public String getKullanıcıadı() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

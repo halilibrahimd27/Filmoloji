@@ -64,7 +64,7 @@ public class KitaplikDAO extends DBConnection {
                         resultSet.getString("tur"),
                         resultSet.getString("adi"),
                         resultSet.getString("konusu"),
-                        resultSet.getString("kategorisi"), // assuming kategori is a single string
+                        resultSet.getString("kategorisi"),
                         resultSet.getString("yonetmen_adi"),
                         resultSet.getString("oyuncular"),
                         resultSet.getBoolean("vizyontrend"),

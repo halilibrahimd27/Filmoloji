@@ -78,11 +78,13 @@ public class FilmveDiziDao extends DBConnection {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
+                // Create IMDb object
                 İmdb imdb = new İmdb(
                         resultSet.getString("imdb"),
                         resultSet.getInt("id")
                 );
 
+                // Create Platform object
                 Platform platform = new Platform(
                         resultSet.getInt("platform_id"),
                         resultSet.getString("platform")
@@ -96,12 +98,13 @@ public class FilmveDiziDao extends DBConnection {
                         resultSet.getString("filetype")
                 );
 
+                // Create FilmveDizi object
                 FilmveDizi filmveDizi = new FilmveDizi(
                         resultSet.getInt("id"),
                         resultSet.getString("tur"),
                         resultSet.getString("adi"),
                         resultSet.getString("konusu"),
-                        resultSet.getString("kategorisi"),
+                        resultSet.getString("kategorisi"), // assuming kategori is a single string
                         resultSet.getString("yonetmen_adi"),
                         resultSet.getString("oyuncular"),
                         resultSet.getBoolean("vizyontrend"),
@@ -136,25 +139,29 @@ public class FilmveDiziDao extends DBConnection {
                     + "WHERE f.id = ?";
 
             PreparedStatement statement = this.getConnect().prepareStatement(query);
-            statement.setInt(1, id);
+            statement.setInt(1, id); // ID parametresini ayarlama
 
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
+                // Create IMDb object
                 İmdb imdb = new İmdb(
                         resultSet.getString("imdb")
                 );
 
+                // Create Platform object
                 Platform platform = new Platform(
                         resultSet.getString("platform")
                 );
 
+                // Create Document object
                 Document document = new Document(
                         resultSet.getString("filepath"),
                         resultSet.getString("filename"),
                         resultSet.getString("filetype")
                 );
 
+                // Create FilmveDizi object
                 filmveDizi = new FilmveDizi(
                         resultSet.getInt("id"),
                         resultSet.getString("tur"),
@@ -215,11 +222,13 @@ public class FilmveDiziDao extends DBConnection {
                         resultSet.getInt("id")
                 );
 
+                // Create Platform object
                 Platform platform = new Platform(
                         resultSet.getInt("platform_id"),
                         resultSet.getString("platform")
                 );
 
+                // Create Document object
                 Document document = new Document(
                         resultSet.getInt("document_id"),
                         resultSet.getString("filepath"),
@@ -227,6 +236,7 @@ public class FilmveDiziDao extends DBConnection {
                         resultSet.getString("filetype")
                 );
 
+                // Create FilmveDizi object
                 FilmveDizi filmveDizi = new FilmveDizi(
                         resultSet.getInt("id"),
                         resultSet.getString("tur"),
@@ -274,6 +284,7 @@ public class FilmveDiziDao extends DBConnection {
             pst2.executeUpdate();
         }
 
+        // Update platform table
         if (fd.getPlatform() != null) {
             String query3 = "UPDATE platform SET platform=? WHERE filmvedizi_id=?";
             PreparedStatement pst3 = this.getConnect().prepareStatement(query3);
@@ -281,6 +292,7 @@ public class FilmveDiziDao extends DBConnection {
             pst3.executeUpdate();
         }
 
+        // Update documents table
         if (fd.getDocument() != null) {
             String query4 = "UPDATE documents SET filepath=?, filename=?, filetype=? WHERE filmvedizi_id=?";
             PreparedStatement pst4 = this.getConnect().prepareStatement(query4);

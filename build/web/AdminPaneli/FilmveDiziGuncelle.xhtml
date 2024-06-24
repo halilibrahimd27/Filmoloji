@@ -10,7 +10,7 @@
     <ui:define name="title">Film veya Diziyi Güncelle </ui:define>
 
     <ui:define name="geriButtonTemplate">
-        <h:commandLink value="Geri" action="FilmveDiziİslemleri.xhtml" styleClass="geriButton" />
+        <h:commandLink value="Geri" action="#{navigationBean.navigateTo('FilmveDiziIslemleri')}" styleClass="geriButton" />
     </ui:define>
 
     <ui:define name="eklemeKısımlari">
@@ -24,7 +24,7 @@
 
             <div class="film-container">
                 <h1> Adı : </h1>
-                <h:inputText  value="#{filmveDiziBean.entity.adi}" styleClass="filmEkleme ad" ></h:inputText>
+                <h:inputText  value="#{filmveDiziBean.entity.setAdi(adi)}" styleClass="filmEkleme ad" ></h:inputText>
             </div>
             <div class="film-container">
                 <h1> Konusu : </h1>

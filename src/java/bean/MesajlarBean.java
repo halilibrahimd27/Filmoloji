@@ -1,49 +1,63 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package bean;
 
-import dao.FilmveDiziDao;
-import dao.MesajlarDAO;
-import entity.FilmveDizi;
-import entity.Mesajlar;
-import jakarta.enterprise.context.SessionScoped;
+import dao.MesajlarDao;
 import jakarta.inject.Named;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.annotation.PostConstruct;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
+import entity.Mesajlar;
 
-/**
- *
- * @author MERVAN
- */
 @Named(value = "mesajlarBean")
 @SessionScoped
-public class MesajlarBean implements Serializable{
-    
+public class MesajlarBean implements Serializable {
+
     private Mesajlar entity;
-    private MesajlarDAO dao;
+    private MesajlarDao dao;
     private List<Mesajlar> list;
-    
-    private int page = 1;
-    private int pageSize = 5;
-    private int pageCount;
+
+    private int currentKullaniciId; // Oturum açmış kullanıcının ID'si
 
     public MesajlarBean() {
+        entity = new Mesajlar();
     }
-    
-    public void create(){
-        this.getDao().create(this.entity);
-        this.entity=new Mesajlar();
+
+    @PostConstruct
+    public void init() {
+        // Geçerli kullanıcı ID'sini burada ayarlayın
+        this.currentKullaniciId = getLoggedInUserId();
+        loadMesajlar(); // Mesajları yükle
     }
-    
-    public void delete(Mesajlar ms){
-        this.getDao().delete(ms);
+
+    private int getLoggedInUserId() {
+        // Oturum açmış kullanıcının ID'sini döndüren mantığı buraya ekleyin
+        return 1; // Örneğin, bu değeri oturumdan veya güvenlik konteksinden alabilirsiniz
+    }
+
+    public void loadMesajlar() {
+        this.list = this.getDao().getMesajlar(currentKullaniciId);
+    }
+
+    public void create() throws SQLException {
+        if (entity != null && currentKullaniciId > 0) {
+            System.out.println("Creating message with kullanici_id: " + currentKullaniciId + ", mesaj: " + entity.getMesaj());
+            this.getDao().create(currentKullaniciId, entity.getMesaj());
+            entity.setMesaj(""); // Mesaj ekledikten sonra textarea'yı temizle
+            loadMesajlar(); // Mesajları güncelle
+        } else {
+            System.out.println("Entity is null or kullanici_id is invalid");
+        }
+    }
+
+    public void delete(int mesaj_id) throws SQLException {
+        this.getDao().delete(mesaj_id);
+        loadMesajlar();
     }
 
     public Mesajlar getEntity() {
-        if(this.entity==null){
-            entity=new Mesajlar();
+        if (entity == null) {
+            entity = new Mesajlar();
         }
         return entity;
     }
@@ -52,19 +66,18 @@ public class MesajlarBean implements Serializable{
         this.entity = entity;
     }
 
-    public MesajlarDAO getDao() {
-         if(this.dao==null){
-            this.dao=new MesajlarDAO();
+    public MesajlarDao getDao() {
+        if (dao == null) {
+            dao = new MesajlarDao();
         }
         return dao;
     }
 
-    public void setDao(MesajlarDAO dao) {
+    public void setDao(MesajlarDao dao) {
         this.dao = dao;
     }
 
     public List<Mesajlar> getList() {
-        this.list = this.getDao().getMesajlarList(page, pageSize);
         return list;
     }
 
@@ -72,30 +85,17 @@ public class MesajlarBean implements Serializable{
         this.list = list;
     }
 
-    public int getPage() {
-        return page;
+    public List<Mesajlar> getMesajlar(int kullanici_id) {
+        System.out.println(kullanici_id);
+        this.list = this.getDao().getMesajlar(kullanici_id);
+        return list;
     }
 
-    public void setPage(int page) {
-        this.page = page;
+    public int getCurrentKullaniciId() {
+        return currentKullaniciId;
     }
 
-    public int getPageSize() {
-        return pageSize;
+    public void setCurrentKullaniciId(int currentKullaniciId) {
+        this.currentKullaniciId = currentKullaniciId;
     }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public int getPageCount() {
-        return pageCount;
-    }
-
-    public void setPageCount(int pageCount) {
-        this.pageCount = pageCount;
-    }
-    
-    
-    
 }

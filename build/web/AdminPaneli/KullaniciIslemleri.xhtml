@@ -9,8 +9,8 @@
     <ui:define name="title">Kullanıcı İşlemleri </ui:define>
 
     <ui:define name="İşlemlerKısmi">
-        <h:commandLink value="Kullanici Ekle" action="KullanıcıEkle.xhtml" styleClass="islem" />
-        <h:commandLink value="Kullanici Sil" action="KullanıcıSil.xhtml" styleClass="islem" />
+        <h:commandLink value="Kullanici Ekle" action="#{navigationBean.navigateTo('KullaniciEkle')}" styleClass="islem" />
+        <h:commandLink value="Kullanici Sil" action="#{navigationBean.navigateTo('KullaniciSil')}" styleClass="islem" />
     </ui:define>
 
 

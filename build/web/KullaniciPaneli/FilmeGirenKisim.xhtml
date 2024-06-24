@@ -38,12 +38,12 @@
 
                 <div class="header-right">
                     <h:form rendered="#{validUser==null}" id="header-right-form">
-                        <h:commandLink styleClass="small-button register" action="girişKısmı.xhtml">
+                        <h:commandLink styleClass="small-button register" action="#{navigationBean.navigateTo('uyeOl')}">
                             <i class="fas fa-user-plus"></i>
                             <span class="nomob">Üye Ol</span>
                         </h:commandLink>
 
-                        <h:commandLink  styleClass="small-button register" action="girisYap.xhtml">
+                        <h:commandLink  styleClass="small-button register" action="#{navigationBean.navigateTo('girisYap')}">
                             <i class="fas fa-user-plus"></i>
                             <span class="nomob">Üye Girişi</span>
                         </h:commandLink>
@@ -180,7 +180,7 @@
                             <h:graphicImage library="images" value="/file/#{filmveDiziBean.filmeGirenlist.document.fileName}"/>
                             <h:form styleClass="formelementkitaplık">
                                 <h:commandButton value="Kitaplığa Ekle" action="#{kitaplikBean.create(filmveDiziBean.filmeGirenlist.id, kullanıcıBean.kullanici_id)}" styleClass="kitaplik">
-                                    
+
                                 </h:commandButton>
 
                             </h:form>
@@ -237,8 +237,8 @@
                 <div class="yorumyap">
                     <h1>Filme Yorum Yaz</h1>
                     <h:form styleClass="formelement">
-                        <h:inputText label="Yorum yap" styleClass="inputt" />
-                        <h:commandButton value="Gönder"  styleClass="buttons" />
+                        <h:inputText label="Yorum yap" styleClass="inputt" id="yorum" value="#{yorumBean.entity.yorum}" />
+                        <h:commandButton value="Gönder"  styleClass="buttons" action="#{yorumBean.create}" />
                     </h:form>
 
                 </div>
@@ -247,45 +247,44 @@
                 <div class="yorumkısmı">
                     <h1>Yorumlar</h1>
 
-                    <ui:repeat value="#" var="#">
+                    <h:dataTable value="#{yorumBean.list}" var="yorum" styleClass="table table-striped">
+                        <h:column styleClass="font-weight-bold">
+                            <f:facet name="header" style="color: white">Kullanıcı ID</f:facet>
+                                #{yorum.kullanici_id}
+                        </h:column>
 
-                        <div class="yorumatanKişi">
+                        <h:column styleClass="font-weight-bold">
+                            <f:facet name="header" style="color: white">Yorumu</f:facet>
+                                #{yorum.yorum}
+                            <br></br>
+                            <div class="yorumatan-durumlar">
+                            <div class="yorumu-beğenenler">
+
+                                <h:form styleClass="form">
+                                    <i class="fa-solid fa-thumbs-up">
+                                        <h:commandButton styleClass="buttons2">
+                                        </h:commandButton>
+                                    </i>
+
+                                </h:form>
 
 
-                            <div class="yorumatan-resim">
-                                <h:graphicImage library="images" name="kullanıcı.png"/>
+                                <p></p>
                             </div>
-
-                            <div class="yorumatan-yazılar">
-                                <p> </p>
-                                <p>  </p>
-                                <div class="yorumatan-durumlar">
-                                    <div class="yorumu-beğenenler">
-
-                                        <h:form styleClass="form">
-                                            <i class="fa-solid fa-thumbs-up">
-                                                <h:commandButton styleClass="buttons2">
-                                                </h:commandButton>
-                                            </i>
-
-                                        </h:form>
-
-
-                                        <p></p>
-                                    </div>
-                                    <div class="yorumu-beğenmeyenler">
-                                        <h:form styleClass="form">
-                                            <i class="fa-solid fa-thumbs-down">
-                                                <h:commandButton styleClass="buttons2">
-                                                </h:commandButton>
-                                            </i>
-                                        </h:form>
-                                        <p></p>
-                                    </div>
-                                </div>
+                            <div class="yorumu-beğenmeyenler">
+                                <h:form styleClass="form">
+                                    <i class="fa-solid fa-thumbs-down">
+                                        <h:commandButton styleClass="buttons2">
+                                        </h:commandButton>
+                                    </i>
+                                </h:form>
+                                <p></p>
                             </div>
                         </div>
-                    </ui:repeat>  
+                        </h:column>
+                        
+
+                    </h:dataTable>
 
                 </div>
             </section>
