@@ -5,9 +5,6 @@
 package dao;
 
 import entity.Admin;
-import entity.FilmveDizi;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,18 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 import util.DBConnection;
 
-/**
- *
- * @author MERVAN
- */
 public class AdminDAO extends DBConnection{
     
     
     public boolean isValidUser(String username,String password){
         boolean isValid = false;
         jakarta.resource.cci.Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
+        PreparedStatement statement;
+        ResultSet resultSet;
         
         try {
             // Veritabanı bağlantısı
@@ -53,14 +46,14 @@ public class AdminDAO extends DBConnection{
     public Admin getAdmin(String username,String password){
         Admin a= new Admin();
         
-        a.setUsername(username);
+        a.setUserName(username);
         a.setPassword(password);
         try{
         
         Statement st = (Statement) this.getConnect().createStatement();
         st.executeUpdate("INSERT INTO admin (username,password) VALUES ('"
                 
-                + a.getUsername()+ "','"
+                + a.getUserName()+ "','"
                 + a.getPassword()+ ")");
                 
 
@@ -76,9 +69,8 @@ public class AdminDAO extends DBConnection{
         try {
 
             Statement st = (Statement) this.getConnect().createStatement();
-            st.executeUpdate("INSERT INTO Admin (username, email,password) VALUES ('"
-                    + a.getUsername()+ "','"
-                    + a.getEmail()+ "','"
+            st.executeUpdate("INSERT INTO admin (username, email,password) VALUES ('"
+                    + a.getUserName()+ "','"
                     + a.getPassword()+ ")");
             
             ResultSet rs =st.getGeneratedKeys();
@@ -118,7 +110,7 @@ public class AdminDAO extends DBConnection{
 
             Statement st = (Statement) this.getConnect().createStatement();
 
-            String query0 = "UPDATE Admin SET id = id - 1 WHERE id > " + a.getId();
+            String query0 = "UPDATE admin SET id = id - 1 WHERE id > " + a.getId();
             String query1 = "DELETE from admin where id=" + a.getId();
             st.executeUpdate(query1);
             st.executeUpdate(query0);
@@ -133,8 +125,7 @@ public class AdminDAO extends DBConnection{
 
         Statement st = (Statement) this.getConnect().createStatement();
         String sql = "UPDATE admin SET "
-                + "name='" + a.getUsername() + "', "
-                + "email='" + a.getEmail()+ "', "
+                + "name='" + a.getUserName() + "', "
                 + "password='" + a.getPassword()+ "', "
                 + "WHERE id=" + a.getId();
 

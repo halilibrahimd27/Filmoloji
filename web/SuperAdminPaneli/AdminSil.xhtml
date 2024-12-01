@@ -22,38 +22,23 @@
                 <p style="text-align: center;">#{superadmin.username} </p>
             </h:column>
 
-            <h:column  styleClass="font-weight-bold " style="text-align: center;">
-                <f:facet   name="header" styleClass="orta">E-MAİL</f:facet>
-                <p style="text-align: center;">#{superadmin.email} </p>   
-            </h:column>
-
             <h:column styleClass="font-weight-bold"  style="text-align: center;">
                 <f:facet   name="header">PASSWORD</f:facet>
                 <p style="text-align: center;"> #{superadmin.password} </p>
             </h:column>
 
-            
 
-            <h:column styleClass="font-weight-bold" >
-                <f:facet   name="header">İşlem</f:facet>
+
+            <h:column styleClass="font-weight-bold">
+                <f:facet name="header">İşlem</f:facet>
                 <div class="button-flex">
-                    <h:commandButton styleClass="btn btn-danger button"  value="Sil" action="#{superAdminBean.delete(superadmin)}" >
-                    </h:commandButton>
-                    <h:commandButton styleClass="btn btn-primary button" value="Güncelle"  action="#{superAdminBean.update}"  />
+                    <h:commandButton styleClass="btn btn-danger button" value="Sil" action="#{superAdminBean.delete(superadmin)}" />
+                    <h:commandButton styleClass="btn btn-primary button" value="Güncelle" action="#{navigationBean.navigateTo('AdminGuncelle')}" />
                 </div>
-
-
-
             </h:column>
 
         </h:dataTable>
 
-        
-        <!-- comment -->
-<!--        <div class="btn-group">
-            <h:commandButton action="" value="geri" styleClass="btn btn-outline-dark"></h:commandButton>
-            <h:commandButton action="" value="ileri" styleClass="btn btn-outline-dark"></h:commandButton>
-        </div>-->
     </ui:define>
 
 </ui:composition>

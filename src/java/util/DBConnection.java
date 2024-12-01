@@ -2,25 +2,26 @@ package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.Connection;
-import java.sql.DriverManager; 
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public abstract class DBConnection {
 
+    // Singleton için tek bir instance
+    private static Connection connection = null;
+
     public Connection getConnect() {
-        Connection c = null;
-        try {
-           
-            Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/FilmveDizi", "postgres", "123456");
-            System.out.println("Basarili");
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+        if (connection == null) { // Bağlantı daha önce oluşturulmadıysa oluştur
+            try {
+                Class.forName("org.postgresql.Driver");
+                connection = DriverManager.getConnection(
+                        "jdbc:postgresql://localhost:5432/Restaurant",
+                        "postgres",
+                        "12345"
+                );
+                System.out.println("Veritabanı bağlantısı başarılı!");
+            } catch (Exception ex) {
+                System.err.println("Veritabanı bağlantı hatası: " + ex.getMessage());
+            }
         }
-        return c;
-
+        return connection; // Var olan bağlantıyı döndür
     }
-
 }

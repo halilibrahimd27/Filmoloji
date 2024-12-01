@@ -4,7 +4,7 @@ import entity.Admin;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 
-@Named(value = "adminBean")
+@Named("adminBean")
 @SessionScoped
 public class AdminBean extends GenericBean<Admin> {
 

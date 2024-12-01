@@ -1,5 +1,6 @@
 package dao;
 
+import entity.Admin;
 import util.DBConnection;
 import java.sql.*;
 import java.util.ArrayList;
@@ -80,5 +81,9 @@ public class GenericDAO<T> extends DBConnection {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void update(Admin entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

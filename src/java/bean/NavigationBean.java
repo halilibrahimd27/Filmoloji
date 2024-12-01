@@ -11,10 +11,6 @@ import jakarta.faces.context.FacesContext;
 import java.io.IOException;
 import java.io.Serializable;
 
-/**
- *
- * @author MERVAN
- */
 @Named(value = "navigationBean")
 @SessionScoped
 public class NavigationBean implements Serializable {

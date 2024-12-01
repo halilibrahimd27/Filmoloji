@@ -7,10 +7,8 @@ package bean;
 import dao.AdminDAO;
 import dao.SuperAdminDAO;
 import entity.Admin;
-import entity.FilmveDizi;
 import entity.SuperAdmin;
 import jakarta.inject.Named;
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -18,15 +16,12 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- *
- * @author MERVAN
- */
-@Named(value = "superAdminBean")
+@Named("superAdminBean")
 @SessionScoped
 public class SuperAdminBean implements Serializable {
 
     private SuperAdmin entity;
+    private Admin entity1;
     private SuperAdminDAO dao;
     private List<SuperAdmin> list;
 
@@ -42,7 +37,7 @@ public class SuperAdminBean implements Serializable {
 
     public String login22() {
         SuperAdmin superadmin = this.getDao().getSuperAdmin(this.username, this.password);
-        if ((getUsername().equals("semih")) && (getPassword().equals("345"))) {
+        if ((getUsername().equals("ibo")) && (getPassword().equals("345"))) {
             //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("admin", admin);
             return "/SuperAdminPaneli/SuperAdminIslemleri?faces-redirect=true";
         } else {
@@ -98,9 +93,13 @@ public class SuperAdminBean implements Serializable {
         this.entity = new SuperAdmin();
     }
 
-    public void update() throws SQLException {
-        this.getDao().update(entity);
-        entity = new SuperAdmin();
+    public void update(SuperAdmin superAdmin) {
+        try {
+            this.getDao().update(superAdmin);
+            System.out.println("SuperAdmin başarıyla güncellendi.");
+        } catch (Exception e) {
+            System.out.println("Güncelleme sırasında hata: " + e.getMessage());
+        }
     }
 
     public void delete(SuperAdmin sa) {
